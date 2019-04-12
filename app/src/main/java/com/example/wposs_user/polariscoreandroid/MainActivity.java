@@ -345,20 +345,24 @@ public class MainActivity extends AppCompatActivity
         this.buscar_serial_terminal = (Button) findViewById(R.id.btn_buscar_serial);
         lbl_msj_buscar_serial = (TextView) findViewById(R.id.lbl_busq_serial);
         txt_serial = (EditText) findViewById(R.id.serial);
-
+        lbl_msj_buscar_serial.setText("");
 
         Vector<Terminal> terminal = new Vector<>();
         for (Terminal ter : this.terminales) {
-            if (ter.getSerial().equalsIgnoreCase(txt_serial.getText().toString())) {
+            if (ter.getSerial().equalsIgnoreCase(txt_serial.getText().toString())&&
+                    (ter.getEstado().equalsIgnoreCase("Diagnostico")||ter.getEstado().equalsIgnoreCase("Reparación"))) {
                 terminal.add(ter);
             }
 
         }
+        if(txt_serial.getText().toString().isEmpty()){
+            this.lbl_msj_buscar_serial.setText("POR FAVOR INGRESE EL SERIAL");
+            return;
+        }
         if (terminal.size() == 0) {
             this.lbl_msj_buscar_serial.setText("NO SE ENCONTRARON TERMINALES REGISTRADAS CON ESE SERIAL");
-            this.terminales.removeAllElements();
+            terminal.removeAllElements();
         }
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales);
         recyclerView.setAdapter(new AdapterTerminal(this, terminal));//le pasa los datos-> lista de usuarios
 
