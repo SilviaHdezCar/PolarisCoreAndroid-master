@@ -177,17 +177,16 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     //********************************************CONSULTAR TERMINALES*********************************************************************************************
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Vector<Terminal> terminales;
 
-    private void agregarTeminalesVector(){
+    private void agregarTeminalesVector() {
         this.terminales = new Vector<>();
-        Terminal t1= new Terminal("12AAE4D", "Gertec", "Newpos9220", "WIFI", "nuevo", null);
-        Terminal t2= new Terminal("GTDAE4D", "Gertec", "Newpos6210", "LAN", "Diagnostico", null);
-        Terminal t3= new Terminal("ASFAFAD", "Gertec", "Newpos7210", "DIAL", "Reparación", null);
+        Terminal t1 = new Terminal("12AAE4D", "Gertec", "Newpos9220", "WIFI", "nuevo", null);
+        Terminal t2 = new Terminal("GTDAE4D", "Gertec", "Newpos6210", "LAN", "Diagnostico", null);
+        Terminal t3 = new Terminal("ASFAFAD", "Gertec", "Newpos7210", "DIAL", "Reparación", null);
         terminales.add(t1);
         terminales.add(t2);
         terminales.add(t3);
@@ -195,7 +194,7 @@ public class MainActivity extends AppCompatActivity
 
 
     //***********TERMINALES ASOCIADAS
-    public void verTerminalesAsociadas(View v){
+    public void verTerminalesAsociadas(View v) {
         btn_asociadas = (Button) findViewById(R.id.btn_terminales_asociadas);
         btn_autorizadas = (Button) findViewById(R.id.btn_terminales_autorizadas);
 
@@ -205,14 +204,14 @@ public class MainActivity extends AppCompatActivity
 
 
         Vector<Terminal> terminales_asociadas = new Vector<>();
-        for(Terminal ter:this.terminales){
-            if (ter.getEstado().equalsIgnoreCase("l")){
+        for (Terminal ter : this.terminales) {
+            if (ter.getEstado().equalsIgnoreCase("l")) {
                 terminales_asociadas.add(ter);
             }
 
         }
 
-        recyclerView=(RecyclerView)findViewById(R.id.recycler_view_consultaTerminales_inicial);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_inicial);
         recyclerView.setAdapter(new AdapterTerminal(this, terminales_asociadas));//le pasa los datos-> lista de usuarios
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
@@ -221,7 +220,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     //*************AUTORIZADAS
-    public void verTerminalesAutorizadas(View v){
+    public void verTerminalesAutorizadas(View v) {
         btn_asociadas = (Button) findViewById(R.id.btn_terminales_asociadas);
         btn_reparadas = (Button) findViewById(R.id.btn_terminales_autorizadas);
 
@@ -231,24 +230,19 @@ public class MainActivity extends AppCompatActivity
 
 
         Vector<Terminal> terminales_asociadas = new Vector<>();
-        for(Terminal ter:this.terminales){
-            if (ter.getEstado().equalsIgnoreCase("l")){
+        for (Terminal ter : this.terminales) {
+            if (ter.getEstado().equalsIgnoreCase("l")) {
                 terminales_asociadas.add(ter);
             }
 
         }
 
-        recyclerView=(RecyclerView)findViewById(R.id.recycler_view_consultaTerminales_inicial);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_inicial);
         recyclerView.setAdapter(new AdapterTerminal(this, terminales_asociadas));//le pasa los datos-> lista de usuarios
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
         recyclerView.setLayoutManager(layoutManager);
     }
-
-
-
-
-
 
 
     //ESTE METODO LISTA LAS TERMINALES QUE TIENEN DIAGNOSTICO
@@ -258,7 +252,7 @@ public class MainActivity extends AppCompatActivity
     private Button btn_autorizadas;
 
     public void verTerminalesDiasnostico(View view) {
-        btn_diagnostico= (Button) findViewById(R.id.btn_terminales_diagnostico);
+        btn_diagnostico = (Button) findViewById(R.id.btn_terminales_diagnostico);
         btn_reparadas = (Button) findViewById(R.id.btn_terminales_reparadas);
 
         btn_diagnostico.setBackgroundColor(0x802196F5);
@@ -266,7 +260,7 @@ public class MainActivity extends AppCompatActivity
         btn_reparadas.setBackgroundColor(0x8045A5F3);
 
 
-        /* Vector<Terminal> terminales_diagnostico = new Vector<>();
+         Vector<Terminal> terminales_diagnostico = new Vector<>();
         for(Terminal ter:this.terminales){
             if (ter.getEstado().equalsIgnoreCase("Diagnostico")){
                 terminales_diagnostico.add(ter);
@@ -280,7 +274,7 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setAdapter(new AdapterTerminal(this, terminales_diagnostico));//le pasa los datos-> lista de usuarios
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
-        recyclerView.setLayoutManager(layoutManager);*/
+        recyclerView.setLayoutManager(layoutManager);
 
 
     }
@@ -292,7 +286,7 @@ public class MainActivity extends AppCompatActivity
 
         btn_reparadas.setBackgroundColor(0x802196F5);
         btn_diagnostico.setBackgroundColor(0x8045A5F3);
-/*
+
         Vector<Terminal> terminales_rep = new Vector<>();
         for(Terminal ter:this.terminales){
             if (ter.getEstado().equalsIgnoreCase("Reparación")){
@@ -306,10 +300,12 @@ public class MainActivity extends AppCompatActivity
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
         recyclerView.setLayoutManager(layoutManager);;
-    }*/
+    }
 
 
-}
+    }
+
+
 
 
 
