@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_stock) {
             fragmentManager.beginTransaction().replace(R.id.contenedor_main, new StockFragment()).commit();
         } else if (id == R.id.nav_consultar_terminales_reparadas) {
+
+            //a lo que de clic me debe salir un cuadro de dialogo para que seleccione el tipo de busqueda
             fragmentManager.beginTransaction().replace(R.id.contenedor_main, new ConsultaTerminalesReparadasFragm()).commit();
 
         } else if (id == R.id.nav_productividad) {

@@ -49,5 +49,11 @@
     <string name="clave_actual">Clave actual</string>
     <string name="clave_nueva">Clave nueva</string>
     <string name="clave_confirmar">Confirmar clave</string>
+    
+    <!--LISTAR LAS OPCIONES DE CONSULTA-->
+    <string-array name="opciones_consulta">
+        <item>Por serial</item>
+        <item>Por rango de fechas</item>
+    </string-array>
 
 </resources>

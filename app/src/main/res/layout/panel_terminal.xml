@@ -9,121 +9,105 @@
         android:orientation="vertical"
         android:background="@drawable/redondo_gris"
         android:id="@+id/layout_terminal"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            >
 
 
             <TextView
                 style="@style/letra_negrita"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_width_rec_view_lbl"
                 android:layout_height="wrap_content"
                 android:text="Serial: " />
 
             <TextView
                 android:id="@+id/serial_ter"
                 style="@style/letra_contenido"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_width_rec_view_text"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
             <TextView
-
                 style="@style/letra_negrita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Marca: "
-
-                />
+                android:text="Marca: " />
 
             <TextView
                 android:id="@+id/marca_ter"
                 style="@style/letra_contenido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/size_width_rec_view_text"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"/>
+
         </LinearLayout>
+
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
 
             <TextView
                 style="@style/letra_negrita"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_width_rec_view_lbl"
                 android:layout_height="wrap_content"
                 android:text="Modelo: " />
 
             <TextView
                 android:id="@+id/modelo_ter"
                 style="@style/letra_contenido"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_width_rec_view_text"
                 android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
 
             <TextView
                 style="@style/letra_negrita"
-                android:layout_width="wrap_content"
+                android:layout_width="75dp"
                 android:layout_height="wrap_content"
                 android:text="Tecnologia: " />
 
             <TextView
                 android:id="@+id/tecno_ter"
                 style="@style/letra_contenido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="@dimen/size_width_rec_view_text"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"/>
+
         </LinearLayout>
+
 
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="10dp">
+            android:padding="2dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp">
 
             <TextView
                 style="@style/letra_negrita"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_width_rec_view_lbl"
                 android:layout_height="wrap_content"
                 android:text="Estado: " />
 
             <TextView
                 android:id="@+id/estado_ter"
                 style="@style/letra_contenido"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_width_rec_view_text"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,12 +117,14 @@
 
             <TextView
                 android:id="@+id/fechal_ter"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/size_width_rec_view_text"
                 android:layout_height="wrap_content"
                 style="@style/letra_contenido"
-
+                android:layout_marginLeft="4dp"
                 />
         </LinearLayout>
+
+
     </LinearLayout>
 
 </RelativeLayout>

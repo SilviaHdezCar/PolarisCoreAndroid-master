@@ -7,5 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="size_width_editText">280dp</dimen>
     <dimen name="size_height_editText">40dp</dimen>
+    <dimen name="size_width_rec_view_text">120dp</dimen>
+    <dimen name="size_width_rec_view_lbl">60dp</dimen>
 
 </resources>

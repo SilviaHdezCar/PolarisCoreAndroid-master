@@ -51,6 +51,20 @@
                 android:orientation="horizontal"
                 android:padding="5dp">
 
+                <!--El cuadro de busquedadebe ser de este tipo
+                <AutoCompleteTextView
+            android:id="@+id/et_destino"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            android:background="@android:drawable/dialog_holo_light_frame"
+            android:gravity="center"
+            android:hint="BARRIO DESTINO"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="32px"
+            android:inputType="text"
+            />
+                -->
+
                 <EditText
                     android:id="@+id/serial"
                     android:layout_width="150dp"
