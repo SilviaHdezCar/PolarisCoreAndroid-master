@@ -45,6 +45,7 @@ public class AdapterTerminal extends RecyclerView.Adapter<AdapterTerminal.ViewHo
     @Override
     public int getItemCount() {
         return listTerminal.size();
+
     }
 
     public class ViewHolderTerminal extends RecyclerView.ViewHolder {

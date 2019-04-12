@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         setTitle(null);
         setSupportActionBar(toolbar);
         agregarTeminalesVector();
+        agregarRepuestos();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    //********************************************CONSULTAR TERMINALES*********************************************************************************************
+    //********************************************AGREGAR TERMINALES*********************************************************************************************
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private Vector<Terminal> terminales;
@@ -204,6 +206,28 @@ public class MainActivity extends AppCompatActivity
         terminales.add(t7);
         terminales.add(t8);
     }
+
+
+    //********************************************AGREGAR REPUESTOS*********************************************************************************************
+
+   Vector<Repuesto> repuestos;
+
+    private void agregarRepuestos() {
+        repuestos= new Vector<>();
+
+       Repuesto r1= new Repuesto("AS1252", "TORNILLO","DISPONIBLE",3);
+        Repuesto r2= new Repuesto("AB233", "PANTALLA","AGOTADA",2);
+        Repuesto r3= new Repuesto("AW3456", "TECLADO","DISPONIBLE",3);
+
+        repuestos.add(r1);
+        repuestos.add(r2);
+        repuestos.add(r3);
+
+    }
+
+
+
+
 
 
     //***********TERMINALES ASOCIADAS
@@ -357,7 +381,38 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, "seleccionó: " + serial.getText().toString(), Toast.LENGTH_LONG).show();
     }
 
+    //*****CARGAR TERMINALES A STOCK
 
+
+    private Button btn_mostrarTerminales;
+
+
+    public void cargarTerminal_stock(View view) {
+
+
+        btn_mostrarTerminales = (Button) findViewById(R.id.btn_ter_stock);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_stock);
+        recyclerView.setAdapter(new AdapterTerminal(this, this.terminales));//le pasa los datos-> lista de usuarios
+
+        layoutManager = new LinearLayoutManager(this);// en forma de lista
+        recyclerView.setLayoutManager(layoutManager);
+
+
+
+    }
+
+    Button btn_mostrarRepuestos;
+
+    public void cargarRepuesto_stock(View view) {
+
+        btn_mostrarRepuestos = (Button) findViewById(R.id.btn_rep_stock);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_stock);
+        recyclerView.setAdapter(new AdapterRepuesto(this,repuestos));//le pasa los datos-> lista de usuarios
+
+        layoutManager = new LinearLayoutManager(this);// en forma de lista
+        recyclerView.setLayoutManager(layoutManager);
+    }
 }
 
 
