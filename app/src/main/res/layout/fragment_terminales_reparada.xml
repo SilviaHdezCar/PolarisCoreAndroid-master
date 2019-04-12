@@ -22,7 +22,7 @@
                 style="@style/letra_tabs"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:background="#802196F5"
+                android:background="@color/azul_claro_nav_bar"
                 android:onClick="verTerminalesDiasnostico"
                 android:scrollbars="vertical"
                 android:text="Terminales diagnostico" />
@@ -32,7 +32,7 @@
                 style="@style/letra_tabs"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:background="@color/azul_claro_nav_bar"
+                android:background="#802196F5"
                 android:onClick="verTerminalesReparadas"
                 android:scrollbars="vertical"
                 android:text="Terminales reparadas" />

@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Vector;
 
@@ -108,7 +109,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -191,10 +191,18 @@ public class MainActivity extends AppCompatActivity
         Terminal t2 = new Terminal("345", "Gertec", "Newpos6210", "LAN", "Diagnostico", null);
         Terminal t3 = new Terminal("ASFAFAD", "Gertec", "Newpos7210", "DIAL", "Reparación", null);
         Terminal t4 = new Terminal("123", "Gertec", "Newpos7210", "DIAL", "Reparación", null);
+        Terminal t5 = new Terminal("1425", "Gertec", "Newpos6210", "DIAL", "Autorizada", null);
+        Terminal t6 = new Terminal("678", "Gertec", "Newpos9220", "DIAL", "Asociada", null);
+        Terminal t7 = new Terminal("342", "Gertec", "Newpos7220", "WIFI", "Asociada", null);
+        Terminal t8 = new Terminal("912", "Gertec", "Newpos6210", "DIAL", "Autorizada", null);
         terminales.add(t1);
         terminales.add(t2);
         terminales.add(t3);
         terminales.add(t4);
+        terminales.add(t5);
+        terminales.add(t6);
+        terminales.add(t7);
+        terminales.add(t8);
     }
 
 
@@ -203,12 +211,20 @@ public class MainActivity extends AppCompatActivity
         btn_asociadas = (Button) findViewById(R.id.btn_terminales_asociadas);
         btn_autorizadas = (Button) findViewById(R.id.btn_terminales_autorizadas);
 
-       /* btn_asociadas.setBackgroundColor(0x802196F5);
+        btn_autorizadas.setBackgroundColor(0x802196F5);
 
-        btn_autorizadas.setBackgroundColor(0x8045A5F3);*/
+        btn_asociadas.setBackgroundColor(0x45A5F3);
+
+        Vector<Terminal> terminales_asoc = new Vector<>();
+        for (Terminal ter : this.terminales) {
+            if (ter.getEstado().equalsIgnoreCase("Asociada")) {
+                terminales_asoc.add(ter);
+            }
+
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_inicial);
-        recyclerView.setAdapter(new AdapterTerminal(this, this.terminales));//le pasa los datos-> lista de usuarios
+        recyclerView.setAdapter(new AdapterTerminal(this, terminales_asoc));//le pasa los datos-> lista de usuarios
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
         recyclerView.setLayoutManager(layoutManager);
@@ -218,15 +234,22 @@ public class MainActivity extends AppCompatActivity
     //*************AUTORIZADAS
     public void verTerminalesAutorizadas(View v) {
         btn_asociadas = (Button) findViewById(R.id.btn_terminales_asociadas);
-        btn_reparadas = (Button) findViewById(R.id.btn_terminales_autorizadas);
+        btn_autorizadas= (Button) findViewById(R.id.btn_terminales_autorizadas);
 
-       /* btn_autorizadas.setBackgroundColor(0x802196F5);
+        btn_asociadas.setBackgroundColor(0x802196F5);
 
-        btn_asociadas.setBackgroundColor(0x8045A5F3);*/
+        btn_autorizadas.setBackgroundColor(0x45A5F3);
 
+        Vector<Terminal> terminales_aut = new Vector<>();
+        for (Terminal ter : this.terminales) {
+            if (ter.getEstado().equalsIgnoreCase("Autorizada")) {
+                terminales_aut.add(ter);
+            }
+
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_inicial);
-        recyclerView.setAdapter(new AdapterTerminal(this, this.terminales));//le pasa los datos-> lista de usuarios
+        recyclerView.setAdapter(new AdapterTerminal(this, terminales_aut));//le pasa los datos-> lista de usuarios
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
         recyclerView.setLayoutManager(layoutManager);
@@ -243,9 +266,9 @@ public class MainActivity extends AppCompatActivity
         btn_diagnostico = (Button) findViewById(R.id.btn_terminales_diagnostico);
         btn_reparadas = (Button) findViewById(R.id.btn_terminales_reparadas);
 
-        btn_diagnostico.setBackgroundColor(0x802196F5);
+        btn_reparadas.setBackgroundColor(0x802196F5);
 
-        btn_reparadas.setBackgroundColor(0x8045A5F3);
+        btn_diagnostico.setBackgroundColor(0x45A5F3);
 
 
      /*   Vector<Terminal> terminales_diagnostico = new Vector<>();
@@ -271,8 +294,8 @@ public class MainActivity extends AppCompatActivity
         btn_diagnostico = (Button) findViewById(R.id.btn_terminales_diagnostico);
         btn_reparadas = (Button) findViewById(R.id.btn_terminales_reparadas);
 
-        /*btn_reparadas.setBackgroundColor(0x802196F5);
-        btn_diagnostico.setBackgroundColor(0x8045A5F3);*/
+        btn_diagnostico.setBackgroundColor(0x802196F5);
+        btn_reparadas.setBackgroundColor(0x45A5F3);
 
     /*    Vector<Terminal> terminales_rep = new Vector<>();
         for(Terminal ter:this.terminales){
@@ -309,24 +332,30 @@ public class MainActivity extends AppCompatActivity
         }
         if (terminal.size() == 0) {
             this.lbl_msj_buscar_serial.setText("NO SE ENCONTRARON TERMINALES REGISTRADAS CON ESE SERIAL");
-        } else {
-
-            recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales);
-            recyclerView.setAdapter(new AdapterTerminal(this, terminal));//le pasa los datos-> lista de usuarios
-
-            layoutManager = new LinearLayoutManager(this);// en forma de lista
-            recyclerView.setLayoutManager(layoutManager);
+            this.terminales.removeAllElements();
         }
+
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales);
+        recyclerView.setAdapter(new AdapterTerminal(this, terminal));//le pasa los datos-> lista de usuarios
+
+        layoutManager = new LinearLayoutManager(this);// en forma de lista
+        recyclerView.setLayoutManager(layoutManager);
+
 
         this.txt_serial.setText("");
     }
 
 
-
-    public void clearData() {
-
+    public void limpiar(View v) {
+        Vector<Terminal> terminal = new Vector<>();
     }
 
+
+    public void verDetalles() {
+        TextView serial = (TextView) findViewById(R.id.serial_ter);
+
+        Toast.makeText(this, "seleccionó: " + serial.getText().toString(), Toast.LENGTH_LONG).show();
+    }
 
 
 }
