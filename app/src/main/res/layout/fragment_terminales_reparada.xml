@@ -63,10 +63,11 @@
                 <Button
                     android:layout_width="120dp"
                     android:layout_height="35dp"
-                    android:id="@+id/btn_cambiar_clave"
+                    android:id="@+id/btn_buscar_serial"
                     android:text="Buscar por serial"
                     android:textAllCaps="false"
                     android:layout_marginLeft="20dp"
+                    android:onClick="buscarPorSerial"
                     android:background="@drawable/redondo_azul"
                     style="@style/letra_botones"/>
             </LinearLayout>
@@ -125,6 +126,13 @@
                     android:src="@drawable/ic_calendar"
                     />
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lbl_busq_serial"
+                android:padding="10dp"
+                style="@style/letra_contenido"/>
 
 
         </LinearLayout>

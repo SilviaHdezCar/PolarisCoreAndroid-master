@@ -22,6 +22,7 @@ public class AdapterTerminal extends RecyclerView.Adapter<AdapterTerminal.ViewHo
     }
 
 
+
     @Override
     public ViewHolderTerminal onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.panel_terminal, null);
@@ -68,7 +69,9 @@ public class AdapterTerminal extends RecyclerView.Adapter<AdapterTerminal.ViewHo
 
         }
 
+
     }
+
 
 
 }
