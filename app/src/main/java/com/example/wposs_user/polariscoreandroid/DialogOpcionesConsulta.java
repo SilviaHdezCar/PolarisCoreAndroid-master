@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,61 +13,35 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class DialogOpcionesConsulta extends DialogFragment {
-
-
-
-/*
-
+public static MainActivity objeto;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        View view =inflater.inflate(R.layout.dialogcambiarclave, null);
-        claveActual = view.findViewById(R.id.dialog_clave_actual);
-        clavenueva = view.findViewById(R.id.dialog_clave_nueva);
-        claveConfirmarClave = view.findViewById(R.id.dialog_clave_confirmar);
+
+        //  View view =inflater.inflate(R.layout.dialogcambiarclave, null);
+        final FragmentManager fragmentManager = objeto.getSupportFragmentManager();
+
 
         builder
                 .setTitle("Seleccione el tipo de consulta")
-                .setView(view)
-
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setItems(R.array.opciones_consulta, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        String actual=claveActual.getText().toString();
-                        String nueva=clavenueva.getText().toString();
-                        String confirmacion=claveConfirmarClave.getText().toString();
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0) {
 
-                        final String msj=validarClave(actual, nueva,confirmacion);
-                        Toast.makeText(getContext(), msj, Toast.LENGTH_LONG).show();
-
-                        if(!msj.equalsIgnoreCase("Actualización exitosa")){
-
-                        }else{
-                            Toast.makeText(getContext(), msj, Toast.LENGTH_LONG).show();
+                            fragmentManager.beginTransaction().replace(R.id.contenedor_main, new ConsultaTerminalesSerial()).commit();
+                        } else if (which == 1) {
+                            fragmentManager.beginTransaction().replace(R.id.contenedor_main, new ConsultaTerminalesReparadasFragm()).commit();
                         }
-
-                    }
-                })
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                            return;
                     }
                 });
         return builder.create();
-    }*/
-
-
-
-
-
+    }
 
 
 }

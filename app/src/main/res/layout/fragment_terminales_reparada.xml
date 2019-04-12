@@ -12,32 +12,6 @@
         android:layout_marginTop="50dp"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/azul_claro_nav_bar">
-
-            <Button
-                android:id="@+id/btn_terminales_diagnostico"
-                style="@style/letra_tabs"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:background="@color/azul_claro_nav_bar"
-                android:onClick="verTerminalesDiasnostico"
-                android:scrollbars="vertical"
-                android:text="Terminales diagnostico" />
-
-            <Button
-                android:id="@+id/btn_terminales_reparadas"
-                style="@style/letra_tabs"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:background="#802196F5"
-                android:onClick="verTerminalesReparadas"
-                android:scrollbars="vertical"
-                android:text="Terminales reparadas" />
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,97 +23,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="5dp">
+                android:padding="5dp"
+                >
 
-                <!--El cuadro de busquedadebe ser de este tipo
-                <AutoCompleteTextView
-            android:id="@+id/et_destino"
-            android:layout_width="330dp"
-            android:layout_height="50dp"
-            android:background="@android:drawable/dialog_holo_light_frame"
-            android:gravity="center"
-            android:hint="BARRIO DESTINO"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="32px"
-            android:inputType="text"
-            />
-                -->
+                <TextView
+                    style="@style/letra_contenido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Estado de la terminal"
+                    android:layout_marginLeft="10dp"/>
 
-                <EditText
-                    android:id="@+id/serial"
-                    android:layout_width="150dp"
+
+                <Spinner
+                    android:layout_width="200dp"
                     android:layout_height="35dp"
-                    android:background="@drawable/redondo_gris"
-                    android:hint="Serial"
-                    android:paddingLeft="5dp"
-                    android:inputType="text" />
+                    android:id="@+id/sp_estado_terminal"
+                    android:paddingLeft="10dp"
+                    android:entries="@array/estados">
+                </Spinner>
 
-                <Button
-                    android:layout_width="120dp"
-                    android:layout_height="35dp"
-                    android:id="@+id/btn_buscar_serial"
-                    android:text="Buscar por serial"
-                    android:textAllCaps="false"
-                    android:layout_marginLeft="20dp"
-                    android:onClick="buscarPorSerial"
-                    android:background="@drawable/redondo_azul"
-                    style="@style/letra_botones"/>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:gravity="center_horizontal">
 
                 <EditText
                     android:id="@+id/txt_fecha_inicio"
-                    android:layout_width="150dp"
-                    android:layout_height="35dp"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
                     android:background="@drawable/redondo_gris"
                     android:hint="Fecha inicial"
                     android:paddingLeft="5dp"
+                    android:layout_marginLeft="20dp"
                     android:inputType="date"
                     android:focusable="false"
                     android:clickable="true"
+                    android:onClick="mostrarCalendar"
                     android:maxLines="1"/>
-
-                <ImageButton
-                    android:id="@+id/btn_fecha_inicio"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_calendar"
-                    />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
 
                 <EditText
                     android:id="@+id/txt_fecha_fin"
-                    android:layout_width="150dp"
-                    android:layout_height="35dp"
+                    android:layout_width="120dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="20dp"
                     android:background="@drawable/redondo_gris"
                     android:hint="Fecha inicial"
-                    android:paddingLeft="5dp"
                     android:inputType="date"
+                    android:paddingLeft="5dp"
                     android:focusable="false"
                     android:clickable="true"
                     android:maxLines="1"/>
 
-                <ImageButton
-                    android:id="@+id/btn_fecha_fin"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/ic_calendar"
-                    />
             </LinearLayout>
+
+
+
+            <Button
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:id="@+id/btn_buscar_terminales"
+                android:layout_marginTop="12dp"
+                android:text="Buscar"
+                android:layout_gravity="center_horizontal"
+                android:textAllCaps="false"
+                android:layout_marginLeft="20dp"
+                android:onClick="buscarTerminalesFechas"
+                android:background="@drawable/redondo_azul"
+                style="@style/letra_botones"/>
 
             <TextView
                 android:layout_width="wrap_content"
