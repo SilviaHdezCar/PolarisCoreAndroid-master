@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--ESTE ES EL MENÚ QUE PERMANECE FIJO DEL NAV_BAR-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Home"
+        android:id="@+id/btn_home"
+        android:icon="@mipmap/ic_home_white"
+        app:showAsAction="always" />
+
+    <item android:title="Disminuir"
+        android:id="@+id/btn_disminuir"
+        android:icon="@mipmap/ic_less_zoom"
+        app:showAsAction="always" />
+
+    <item android:title="Aumentar"
+        android:id="@+id/btn_aumentar"
+        android:icon="@mipmap/ic_more_white"
+        app:showAsAction="always" />
+</menu>
