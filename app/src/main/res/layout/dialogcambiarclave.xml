@@ -6,7 +6,9 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:id="@+id/panel_cambiar_clave"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/gris_fondo"
+    >
 
     <TextView
         style="@style/letra_titulos"

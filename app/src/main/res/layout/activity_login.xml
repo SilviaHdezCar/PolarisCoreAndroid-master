@@ -51,6 +51,8 @@
         android:inputType="textEmailAddress"
         android:textSize="14dp"
 
+
+
         />
 
     <EditText
@@ -82,32 +84,26 @@
             android:textColor="@color/blanco"
             android:textSize="14dp" />
 
+        <Button
+            android:id="@+id/btn_prueba"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="450dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/redondo_azul"
+            android:onClick="actu_clave"
+            android:text="Actualizar Clave"
+            android:textAllCaps="false"
+            android:textColor="@color/blanco"
+            android:textSize="14dp" />
 
-    <ImageButton
-        android:id="@+id/btn_huella"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="530dp"
-        android:layout_centerHorizontal="true"
-        android:background="@color/gris_fondo"
-        app:srcCompat="@mipmap/huella_100"
-
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/LoginHuella"
-        android:layout_marginTop="600dp"
-        android:textSize="14dp"
-
-        />
 
         <ImageView
         android:id="@+id/imageView3"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
+        android:layout_height="700dp"
         android:layout_marginTop="-280dp"
         android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/logo"
@@ -119,9 +115,8 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginLeft="285dp"
-        android:layout_marginTop="259dp"
+           android:layout_marginTop="259dp"
          app:srcCompat="@drawable/user"
-
 
         />
 
