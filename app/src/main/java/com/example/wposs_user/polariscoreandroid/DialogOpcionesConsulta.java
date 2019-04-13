@@ -9,11 +9,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class DialogOpcionesConsulta extends DialogFragment {
-public static MainActivity objeto;
+    public static MainActivity objeto;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -33,8 +35,8 @@ public static MainActivity objeto;
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
-
                             fragmentManager.beginTransaction().replace(R.id.contenedor_main, new ConsultaTerminalesSerial()).commit();
+
                         } else if (which == 1) {
                             fragmentManager.beginTransaction().replace(R.id.contenedor_main, new ConsultaTerminalesReparadasFragm()).commit();
                         }
@@ -42,6 +44,8 @@ public static MainActivity objeto;
                 });
         return builder.create();
     }
+
+
 
 
 }

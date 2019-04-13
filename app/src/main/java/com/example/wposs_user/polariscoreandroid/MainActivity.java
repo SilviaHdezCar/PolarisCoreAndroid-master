@@ -1,15 +1,25 @@
 package com.example.wposs_user.polariscoreandroid;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,6 +36,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -33,7 +44,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Vector;
+import java.util.logging.Logger;
 
 import static com.example.wposs_user.polariscoreandroid.DialogOpcionesConsulta.objeto;
 
@@ -42,10 +56,31 @@ public class MainActivity extends AppCompatActivity
     private AppBarLayout appBar;
     private TabLayout tabs;
     private ViewPager viewPager;
-    private TextView lbl_msj_buscar_serial;
-    private AutoCompleteTextView serial;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+
+
+    private TextView serial;
+    private Button buscar_serial_terminal;
+    private Vector<Terminal> terminales;
+
+    //private AutoCompleteTextView serial;
 
     private Spinner spinner_estado_terminal;
+    private EditText f_inicio;
+    private EditText f_fin;
+    FragmentManager fragmentManager;
+   /* public static String Fecha1, Fecha2;
+
+    boolean isChanged=false;
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
+
+
+    public final java.util.Calendar c = java.util.Calendar.getInstance();
+    final int mes = c.get(java.util.Calendar.MONTH);
+    final int dia = c.get(java.util.Calendar.DAY_OF_MONTH);
+    final int anio = c.get(java.util.Calendar.YEAR);*/
 
 
     @Override
@@ -53,12 +88,15 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        fragmentManager = getSupportFragmentManager();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setTitle(null);
         setSupportActionBar(toolbar);
+
         agregarTeminalesVector();
         agregarRepuestos();
-        objeto=this;
+        objeto = this;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -203,9 +241,7 @@ public class MainActivity extends AppCompatActivity
 
 
     //********************************************AGREGAR TERMINALES*********************************************************************************************
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private Vector<Terminal> terminales;
+
 
     private void agregarTeminalesVector() {
         this.terminales = new Vector<>();
@@ -245,92 +281,61 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-//*********************************************METODOS DE BÚSQUEDA***************************
-    //metodo que autocompleta
-    public void buscarTerminalSerial() {
 
-        serial = (AutoCompleteTextView) findViewById(R.id.serial);
-        lbl_msj_buscar_serial = (TextView) findViewById(R.id.lbl_busq_serial);
+    //*******************************BUSQUEDA POR SERIAL
 
-        lbl_msj_buscar_serial.setText("");
-
-        ArrayList<String> terminales = new ArrayList<>();
-        for (Terminal ter : this.terminales) {
-            terminales.add(ter.getSerial());
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, terminales);
-        serial.setAdapter(adapter);
-        serial.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                InputMethodManager in = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                in.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
-                buscarPorSerial();
-            }
-        });
-        serial.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_ACTION_DONE) {
-                    InputMethodManager in = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                    in.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
-                    buscarPorSerial();
-                    return true;
-                }
-                return false;
-            }
-        });
-    }
-
-
-    public void buscarPorSerial() {
-        lbl_msj_buscar_serial = (TextView) findViewById(R.id.lbl_busq_serial);
-        lbl_msj_buscar_serial.setText("");
-        serial = (AutoCompleteTextView) findViewById(R.id.serial);
+    public void buscarTerminalesPorSerial(View v) {
+        this.buscar_serial_terminal = (Button) findViewById(R.id.btn_buscar_terminales_serial);
+        serial = (TextView) findViewById(R.id.serial);
 
         Vector<Terminal> terminal = new Vector<>();
-        for (Terminal ter : this.terminales) {
-            if (ter.getSerial().equalsIgnoreCase(serial.getText().toString())){
-                terminal.add(ter);
-            }
+        terminal.removeAllElements();
 
-        }
         if (serial.getText().toString().isEmpty()) {
-            this.lbl_msj_buscar_serial.setText("POR FAVOR INGRESE EL SERIAL");
+            Toast.makeText(this, "POR FAVOR INGRESE EL SERIAL", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (terminal.size() == 0) {
-            this.lbl_msj_buscar_serial.setText("NO SE ENCONTRARON TERMINALES REGISTRADAS CON ESE SERIAL");
-            terminal.removeAllElements();
+
+
+        for (Terminal ter : this.terminales) {
+            if (ter.getSerial().equalsIgnoreCase(serial.getText().toString())) {
+                terminal.add(ter);
+                recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_por_serial);
+                recyclerView.setAdapter(new AdapterTerminal(this, terminal));//le pasa los datos-> lista de usuarios
+                layoutManager = new LinearLayoutManager(this);// en forma de lista
+                recyclerView.setLayoutManager(layoutManager);
+
+            }
         }
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_serial);
-        recyclerView.setAdapter(new AdapterTerminal(this, terminal));//le pasa los datos-> lista de usuarios
-
-        layoutManager = new LinearLayoutManager(this);// en forma de lista
-        recyclerView.setLayoutManager(layoutManager);
-
-
-        this.serial.setText("");
+        if (terminal.size() == 0) {
+            Toast.makeText(this, "NO SE ENCONTRARON TERMINALES REGISTRADAS CON ESE SERIAL", Toast.LENGTH_SHORT).show();
+            recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_por_serial);
+            recyclerView.setAdapter(new AdapterTerminal(this, terminal));//le pasa los datos-> lista de usuarios
+            layoutManager = new LinearLayoutManager(this);// en forma de lista
+            recyclerView.setLayoutManager(layoutManager);
+        }
+        serial.setText("");
     }
 
     //******************************BUSQUEDA POR FECHAS*****************************
 
-        public void buscarTerminalesFechas(View V){
-        spinner_estado_terminal = (Spinner)findViewById(R.id.sp_estado_terminal);
+
+    public void buscarTerminalesFechas(View V) {
+        spinner_estado_terminal = (Spinner) findViewById(R.id.sp_estado_terminal);
+      String estado= spinner_estado_terminal.getSelectedItem().toString();
+
+      if()
 
 
-        }
+
+
+    }
 
 
     //METODOS PARA MOSTRAR EL CALENDARIO
-    public void mostrarCalendar(View view){
-        EditText f_inicio =(EditText)findViewById(R.id.txt_fecha_inicio);
-        EditText f_fin =(EditText)findViewById(R.id.txt_fecha_fin);
 
-        DatePickerFragment newFragment = new DatePickerFragment();
-        newFragment.show(getActivity().getSupportFragmentManager(), "datePicker")
-    }
+
+
 
     //***********TERMINALES ASOCIADAS
     public void verTerminalesAsociadas(View v) {
@@ -345,6 +350,7 @@ public class MainActivity extends AppCompatActivity
         for (Terminal ter : this.terminales) {
             if (ter.getEstado().equalsIgnoreCase("Asociada")) {
                 terminales_asoc.add(ter);
+
             }
 
         }
@@ -356,12 +362,6 @@ public class MainActivity extends AppCompatActivity
         recyclerView.setLayoutManager(layoutManager);
 
     }
-
-
-
-
-
-
 
 
     //*************AUTORIZADAS
@@ -428,6 +428,44 @@ public class MainActivity extends AppCompatActivity
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
         recyclerView.setLayoutManager(layoutManager);
+    }
+
+
+    public Vector<Terminal> getTerminales() {
+        System.out.println("***************************************LISTA DE TERMINALES********************************************" + this.terminales.size());
+        return terminales;
+    }
+
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
+    }
+
+    public void setRecyclerView(RecyclerView recyclerView) {
+        this.recyclerView = recyclerView;
+    }
+
+    public RecyclerView.LayoutManager getLayoutManager() {
+        return layoutManager;
+    }
+
+    public void setLayoutManager(RecyclerView.LayoutManager layoutManager) {
+        this.layoutManager = layoutManager;
+    }
+
+    public EditText getF_inicio() {
+        return f_inicio;
+    }
+
+    public void setF_inicio(EditText f_inicio) {
+        this.f_inicio = f_inicio;
+    }
+
+    public EditText getF_fin() {
+        return f_fin;
+    }
+
+    public void setF_fin(EditText f_fin) {
+        this.f_fin = f_fin;
     }
 }
 
