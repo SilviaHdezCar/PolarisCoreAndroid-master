@@ -17,6 +17,7 @@ public class DialogOpcionesConsulta extends DialogFragment {
     public static MainActivity objeto;
 
 
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
