@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+    >
 
     <LinearLayout
         android:id="@+id/layout_terminal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/redondo_gris"
+        android:background="@drawable/borde_derecho"
         android:orientation="horizontal">
 
         <ImageView
@@ -16,21 +18,19 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="13dp"
             android:src="@drawable/user" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/redondo_gris"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
-                android:background="@color/azul_claro_nav_bar"
                 android:orientation="horizontal">
 
                 <TextView
@@ -61,8 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:orientation="horizontal"
-                android:padding="2dp">
+                android:orientation="horizontal">
 
 
                 <TextView
@@ -75,9 +74,7 @@
                     style="@style/letra_contenido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
                     android:text=" - " />
-
 
                 <TextView
                     android:id="@+id/tecno_ter"
@@ -88,43 +85,37 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/estado_ter"
+                    style="@style/letra_contenido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/letra_contenido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" - " />
+
+                <TextView
+                    android:id="@+id/fechal_ter"
+                    style="@style/letra_contenido"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp" />
+            </LinearLayout>
+
         </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal"
-            android:padding="2dp">
 
-            <TextView
-                style="@style/letra_negrita"
-                android:layout_width="@dimen/size_width_rec_view_lbl"
-                android:layout_height="wrap_content"
-                android:text="Estado: " />
-
-            <TextView
-                android:id="@+id/estado_ter"
-                style="@style/letra_contenido"
-                android:layout_width="@dimen/size_width_rec_view_text"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                style="@style/letra_negrita"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fecha ANS: " />
-
-            <TextView
-                android:id="@+id/fechal_ter"
-                style="@style/letra_contenido"
-                android:layout_width="@dimen/size_width_rec_view_text"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp" />
-        </LinearLayout>
 
 
     </LinearLayout>
