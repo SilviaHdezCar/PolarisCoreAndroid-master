@@ -51,10 +51,11 @@ public class ConsultaTerminalesReparadasFragm extends Fragment {
 
         f_inicio = (EditText) view.findViewById(R.id.txt_fecha_inicio);
         f_fin = (EditText) view.findViewById(R.id.txt_fecha_fin);
+
         f_inicio.setInputType(InputType.TYPE_NULL);
         f_fin.setInputType(InputType.TYPE_NULL);
-        f_inicio.setInputType(InputType.TYPE_NULL);
-        f_fin.setInputType(InputType.TYPE_NULL);
+
+
         java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         Date date = new Date();
         String fecha = dateFormat.format(date);
