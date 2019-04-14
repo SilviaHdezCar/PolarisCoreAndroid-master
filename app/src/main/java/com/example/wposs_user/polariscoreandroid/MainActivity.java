@@ -324,7 +324,7 @@ public class MainActivity extends AppCompatActivity
         spinner_estado_terminal = (Spinner) findViewById(R.id.sp_estado_terminal);
       String estado= spinner_estado_terminal.getSelectedItem().toString();
 
-      if()
+     // if()
 
 
 
