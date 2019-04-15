@@ -56,13 +56,17 @@ public class MainActivity extends AppCompatActivity
     private AppBarLayout appBar;
     private TabLayout tabs;
     private ViewPager viewPager;
-    private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-
+    public RecyclerView recyclerView;
+    public RecyclerView.LayoutManager layoutManager;
+    Vector<Repuesto> repuestos;
+    Vector<Etapas> etapas;
 
     private TextView serial;
     private Button buscar_serial_terminal;
     private Vector<Terminal> terminales;
+    Terminal t6;
+    Terminal t7;
+    Terminal t9;
 
     //private AutoCompleteTextView serial;
 
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity
 
         agregarTeminalesVector();
         agregarRepuestos();
+       // agregarEtapasVector();
         objeto = this;
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -250,8 +255,9 @@ public class MainActivity extends AppCompatActivity
         Terminal t3 = new Terminal("ASFAFAD", "Gertec", "Newpos7210", "DIAL", "Reparación", null);
         Terminal t4 = new Terminal("123", "Gertec", "Newpos7210", "DIAL", "Reparación", null);
         Terminal t5 = new Terminal("1425", "Gertec", "Newpos6210", "DIAL", "Autorizada", null);
-        Terminal t6 = new Terminal("678", "Gertec", "Newpos9220", "DIAL", "Asociada", null);
-        Terminal t7 = new Terminal("342", "Gertec", "Newpos7220", "WIFI", "Asociada", null);
+        t6 = new Terminal("678", "Gertec", "Newpos9220", "DIAL", "Asociada", null, null, 56, "Le está fallando algo");
+        t9 = new Terminal("147", "Newposs", "9220", "DIAL", "Asociada", null, null, -3, "Cuidado, Le está fallando algo");
+        t7 = new Terminal("342", "Gertec", "Newpos7220", "WIFI", "Asociada", null, null, 0, "Algo tiene mal");
         Terminal t8 = new Terminal("912", "Gertec", "Newpos6210", "DIAL", "Autorizada", null);
         terminales.add(t1);
         terminales.add(t2);
@@ -263,10 +269,27 @@ public class MainActivity extends AppCompatActivity
         terminales.add(t8);
     }
 
+    //***********************************AGREGAR  ETAPAS*************************************
+    private void agregarEtapasVector()    {
+            this.etapas=new Vector<>();
+            Etapas e1=new Etapas(t6,null );
+            Etapas e2=new Etapas(t7,null );
+            Etapas e3=new Etapas(t7,null );
+            Etapas e4=new Etapas(t7,null );
+
+            etapas.add(e1);
+            etapas.add(e2);
+            etapas.add(e3);
+            etapas.add(e4);
+
+        System.err.println("******************estapas creadas");
+        }
+
+
 
     //********************************************AGREGAR REPUESTOS*********************************************************************************************
 
-    Vector<Repuesto> repuestos;
+
 
     private void agregarRepuestos() {
         repuestos = new Vector<>();
@@ -356,7 +379,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_consultaTerminales_inicial);
-        recyclerView.setAdapter(new AdapterTerminal(this, terminales_asoc));//le pasa los datos-> lista de usuarios
+        recyclerView.setAdapter(new AdapterTerminal_asociada(this, terminales_asoc));//le pasa los datos-> lista de terminales
 
         layoutManager = new LinearLayoutManager(this);// en forma de lista
         recyclerView.setLayoutManager(layoutManager);
@@ -394,11 +417,13 @@ public class MainActivity extends AppCompatActivity
     private Button btn_autorizadas;
 
 
-    public void verDetalles() {
-        TextView serial = (TextView) findViewById(R.id.serial_ter);
+    public void verDetalles(View view) {
+        TextView cod = (TextView) findViewById(R.id.serial_ter_asociada);
+        fragmentManager.beginTransaction().replace(R.id.contenedor_main, new EtapasTerminal()).commit();
+        Toast.makeText(this, "seleccionó: " + cod.getText().toString(), Toast.LENGTH_LONG).show();
 
-        Toast.makeText(this, "seleccionó: " + serial.getText().toString(), Toast.LENGTH_LONG).show();
     }
+
 
     //*****CARGAR TERMINALES A STOCK
 
@@ -466,6 +491,22 @@ public class MainActivity extends AppCompatActivity
 
     public void setF_fin(EditText f_fin) {
         this.f_fin = f_fin;
+    }
+
+    public Vector<Etapas> getEtapas() {
+        return etapas;
+    }
+
+    public Terminal getT6() {
+        return t6;
+    }
+
+    public Terminal getT7() {
+        return t7;
+    }
+
+    public Terminal getT9() {
+        return t9;
     }
 }
 

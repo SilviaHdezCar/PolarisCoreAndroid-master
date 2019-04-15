@@ -40,4 +40,11 @@
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="letra_cuadro_etapas">
+        <item name="android:textColor">@color/blanco</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
