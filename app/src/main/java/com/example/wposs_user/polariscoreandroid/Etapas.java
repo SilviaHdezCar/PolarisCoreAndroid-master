@@ -4,30 +4,22 @@ import java.util.Date;
 
 public class Etapas {
 
-    Terminal terminal;
+    String observacion;
     private Date fecha;
-    private int contador=1;
+    private Usuario usuario;
 
-    public Etapas(Terminal terminal, Date fecha) {
-        this.terminal = terminal;
+    public Etapas(String observacion, Date fecha, Usuario usuario) {
+        this.observacion = observacion;
         this.fecha = fecha;
-        this.contador=contador++;
+        this.usuario = usuario;
     }
 
-    public int getContador() {
-        return contador;
+    public String getObservacion() {
+        return observacion;
     }
 
-    public void setContador(int contador) {
-        this.contador = contador;
-    }
-
-    public Terminal getTerminal() {
-        return terminal;
-    }
-
-    public void setTerminal(Terminal terminal) {
-        this.terminal = terminal;
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
     public Date getFecha() {
@@ -38,4 +30,11 @@ public class Etapas {
         this.fecha = fecha;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

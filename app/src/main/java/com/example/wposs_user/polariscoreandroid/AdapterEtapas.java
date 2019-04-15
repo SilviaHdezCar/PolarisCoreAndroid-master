@@ -19,8 +19,6 @@ public class AdapterEtapas extends RecyclerView.Adapter<AdapterEtapas.ViewHolder
         this.inflador = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-
-
     @Override
     public ViewHolderEtapas onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_etapas_terminal, null);
@@ -30,11 +28,11 @@ public class AdapterEtapas extends RecyclerView.Adapter<AdapterEtapas.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolderEtapas holder, int i) {
-        Etapas eta = this.listEtapa.elementAt(i);
+       Etapas eta = this.listEtapa.elementAt(i);
         holder.contador_etapas.setText("1");
-        holder.usuario_etapas.setText(eta.getTerminal().getUsuario().getNombre()+" "+eta.getTerminal().getUsuario().getApellido());
+        holder.usuario_etapas.setText(eta.getUsuario().getNombre()+"   "+eta.getUsuario().getApellido());
         holder.fecha_etapas.setText(eta.getFecha()+"");
-        holder.observaciones_etapas.setText(eta.getTerminal().getObservacion());
+        holder.observaciones_etapas.setText(eta.getObservacion());
 
     }
 
@@ -57,14 +55,13 @@ public class AdapterEtapas extends RecyclerView.Adapter<AdapterEtapas.ViewHolder
             usuario_etapas = (TextView) v.findViewById(R.id.usuario_etapas);
             fecha_etapas = (TextView) v.findViewById(R.id.fecha_etapas);
             observaciones_etapas = (TextView) v.findViewById(R.id.observaciones_etapas);
-            contador_etapas = (TextView) v.findViewById(R.id.contador_etapas);
-
-
-
+            contador_etapas = (TextView) v.findViewById(R.id.contador_et);
         }
 
-
     }
+
+
+
 
 
 

@@ -1,26 +1,13 @@
 package com.example.wposs_user.polariscoreandroid;
 
-import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,24 +17,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import com.example.wposs_user.polariscoreandroid.Adaptadores.AdapterRepuesto;
+import com.example.wposs_user.polariscoreandroid.Adaptadores.AdapterTerminal;
+import com.example.wposs_user.polariscoreandroid.Adaptadores.AdapterTerminal_asociada;
+
 import java.util.Vector;
-import java.util.logging.Logger;
 
 import static com.example.wposs_user.polariscoreandroid.DialogOpcionesConsulta.objeto;
 
@@ -270,22 +251,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     //***********************************AGREGAR  ETAPAS*************************************
-    private void agregarEtapasVector()    {
-            this.etapas=new Vector<>();
-            Etapas e1=new Etapas(t6,null );
-            Etapas e2=new Etapas(t7,null );
-            Etapas e3=new Etapas(t7,null );
-            Etapas e4=new Etapas(t7,null );
+    private void agregarEtapasVector() {
+        Usuario us = new Usuario("Silvia", "Hernandez");
 
-            etapas.add(e1);
-            etapas.add(e2);
-            etapas.add(e3);
-            etapas.add(e4);
+        Vector<Etapas> et = new Vector<Etapas>();
+        Etapas e1 = new Etapas("en buen estado", null, new Usuario("Silvia", "Hernandez"));
+        Etapas e2 = new Etapas("en buen estado", null, new Usuario("Hender", "Guarin"));
+        Etapas e3 = new Etapas("en buen estado", null, new Usuario("Andres", "Gonzalez"));
+
+        etapas.add(e1);
+        etapas.add(e2);
+        etapas.add(e3);
 
         System.err.println("******************estapas creadas");
-        }
 
 
+    }
 
     //********************************************AGREGAR REPUESTOS*********************************************************************************************
 

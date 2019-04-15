@@ -1,54 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     >
-<LinearLayout
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+
+        app:srcCompat="@drawable/repuesto" />
+
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/redondo_gris"
     android:id="@+id/layout_terminal"
-    android:layout_margin="5dp"
-    android:padding="10dp"
+     android:padding="5dp"
     >
 
     <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-
+        android:layout_marginLeft="70dp"
     >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Codigo"
-        style="@style/letra_negrita"
-        />
+
+
+
+                <TextView
+            android:id="@+id/nom_rep"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+             android:layout_marginTop="10dp"
+                    />
 
         <TextView
             android:id="@+id/cod_rep"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre"
             android:layout_marginLeft="20dp"
-            style="@style/letra_negrita"
-            />
+            android:layout_marginTop="10dp"
 
-        <TextView
-            android:id="@+id/nom_rep"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp" />
+            />
 
 
 
@@ -58,30 +59,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="5dp"
 
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Estado"
-            style="@style/letra_negrita"
-            />
+
 
         <TextView
             android:id="@+id/estado_rep"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cantidad"
             android:layout_marginLeft="20dp"
-            style="@style/letra_negrita"
-            />
+             />
+
+
 
         <TextView
             android:id="@+id/cant_rep"

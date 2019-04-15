@@ -27,10 +27,10 @@ public class EtapasTerminal extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_etapas_terminal, container, false);
 
-        agregarEtapasVector();
+       // agregarEtapasVector();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_etapas);
-        recyclerView.setAdapter(new AdapterEtapas(getActivity(), etapas));//le pasa los datos-> lista de usuarios
+         recyclerView.setAdapter(new AdapterEtapas(getActivity(), etapas));//le pasa los datos-> lista de usuarios
 
         layoutManager = new LinearLayoutManager(getContext());// en forma de lista
         recyclerView.setLayoutManager(layoutManager);
@@ -39,7 +39,7 @@ public class EtapasTerminal extends Fragment {
     }
 
 
-    private void agregarEtapasVector() {
+ /*   private void agregarEtapasVector() {
         this.terminales =new Vector<>();
         Terminal t1 = new Terminal("678", "Gertec", "Newpos9220", "DIAL", "Asociada", null, null, 56, "Le está fallando algo");
         Terminal t2 = new Terminal("147", "Newposs", "9220", "DIAL", "Asociada", null, null, -3, "Cuidado, Le está fallando algo");
@@ -60,6 +60,6 @@ public class EtapasTerminal extends Fragment {
 
         System.err.println("******************estapas creadas");
     }
-
+*/
 
 }

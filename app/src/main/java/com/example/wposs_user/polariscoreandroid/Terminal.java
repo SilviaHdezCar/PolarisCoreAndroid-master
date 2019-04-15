@@ -21,9 +21,8 @@ public class Terminal {
     private  int periodoGarantía;
     private Usuario usuario;
     private String ubicacion;
-    private String observacion;
-   private ArrayList<Observacion> observaciones;
- //  private ArrayList<Etapas> Etapas;
+    private ArrayList<Etapas> etapas;
+
 
     public Terminal(String serial, String marca, String modelo,
                     String tecnologia, String estado,
@@ -36,10 +35,10 @@ public class Terminal {
         this.fechaRegistro = fechaRegistro;
         this.fechaLimite = fechaLimite;
         this.periodoGarantía = periodoGarantía;
-       this.observacion = observacion;
-        this.observaciones=new ArrayList<Observacion>();
-       // this.observaciones.add(observacion);
-    }
+        this.etapas=new ArrayList<Etapas>();
+         }
+
+
     public Terminal(String serial, String marca, String modelo,
                     String tecnologia, String estado,
                     Date fechaLimite, Date fechaRegistro,int periodoGarantía) {
@@ -63,13 +62,11 @@ public class Terminal {
     }
 
 
-    public ArrayList<Observacion> getObservaciones() {
-        return observaciones;
+    public ArrayList<Etapas> getObservaciones() {
+        return etapas;
     }
 
-    public void setObservaciones(ArrayList<Observacion> observaciones) {
-        this.observaciones = observaciones;
-    }
+
 
     public String getImei() {
         return imei;
@@ -79,13 +76,6 @@ public class Terminal {
         this.imei = imei;
     }
 
-    public String getObservacion() {
-        return observacion;
-    }
-
-    public void setObservacion(String observacion) {
-        this.observacion = observacion;
-    }
 
     public String getSerial() {
         return serial;
