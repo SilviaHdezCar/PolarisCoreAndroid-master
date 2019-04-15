@@ -1,14 +1,15 @@
-package com.example.wposs_user.polariscoreandroid;
+package com.example.wposs_user.polariscoreandroid.Adaptadores;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.example.wposs_user.polariscoreandroid.R;
+import com.example.wposs_user.polariscoreandroid.Repuesto;
+
 import java.util.Vector;
 
 public class AdapterRepuesto extends RecyclerView.Adapter<AdapterRepuesto.ViewHolderRepuesto>{
