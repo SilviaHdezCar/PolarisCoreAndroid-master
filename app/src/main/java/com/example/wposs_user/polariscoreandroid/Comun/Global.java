@@ -16,6 +16,19 @@ public class Global {
 
     public static Socket tcpSocket = null;
 
+    public static String TOKEN;
+    public static  String MESSAGE;
+    public static String ROL;
+    public static  String LOGIN;
+    public static String ID;
+    public static String STATUS;
+    public static String POSITION;
+    public static String CODE;
+
+
+
+
+    public static  int tamañoTrama;
 
     public static  String    WEB_SERVICE          = "";
 

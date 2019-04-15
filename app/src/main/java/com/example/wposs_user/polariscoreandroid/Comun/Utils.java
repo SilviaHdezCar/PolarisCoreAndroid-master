@@ -660,7 +660,7 @@ public class Utils {
                        tiempo = Tiempo del dialogo
      Return          : Ninguno
      ******************************************************************************/
-    public static void CustomAlertDialog (Context c, String titulo, String msg, int tiempo){
+   /* public static void CustomAlertDialog (Context c, String titulo, String msg, int tiempo){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(c,
                 R.style.DialogColor));
@@ -676,7 +676,7 @@ public class Utils {
         int titleDividerId = c.getResources().getIdentifier("titleDivider", "id", "android");
         View titleDivider = dialog.findViewById(titleDividerId);
         if (titleDivider != null)
-            titleDivider.setBackgroundColor(c.getResources().getColor(R.color.colorPrimary));
+            titleDivider.setBackgroundColor(c.getResources().getColor(colors.colorPrimary));
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -686,7 +686,7 @@ public class Utils {
             }
         }, tiempo);
     }
-
+*/
     /*******************************************************************************
     Function        : CustomAlertDialogImpresion
     Description     : Crea un dialogo customizado
@@ -696,7 +696,7 @@ public class Utils {
                       tiempo = Tiempo del dialogo
     Return          : Ninguno
      ******************************************************************************/
-    public static void CustomAlertDialogImpresion (Context c, String titulo, String msg, int tiempo){
+    /*public static void CustomAlertDialogImpresion (Context c, String titulo, String msg, int tiempo){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(c,
                 R.style.DialogColor));
@@ -720,7 +720,7 @@ public class Utils {
                 dialog.dismiss();
             }
         }, tiempo);
-    }
+    }*/
 
     /*******************************************************************************
      Function        : CustomToast
@@ -784,13 +784,13 @@ public class Utils {
                        dialog = Dialogo a pintar
      Return          : cadena con los decimales seleccionados
      ******************************************************************************/
-    public static void pintarLineaDialogo(Context c, Dialog dialog) {
+  /*  public static void pintarLineaDialogo(Context c, Dialog dialog) {
 
         int titleDividerId = c.getResources().getIdentifier("titleDivider", "id", "android");
         View titleDivider = dialog.findViewById(titleDividerId);
         if (titleDivider != null)
             titleDivider.setBackgroundColor(c.getResources().getColor(R.color.colorPrimary));
-    }
+    }*/
 
     /*******************************************************************************
      Function        : colorizeDatePicker
@@ -798,7 +798,7 @@ public class Utils {
      Input           : datePicker = DatePicker a pintar
      Return          : Nothing
      ******************************************************************************/
-    public static void colorizeDatePicker(DatePicker datePicker) {
+  /*  public static void colorizeDatePicker(DatePicker datePicker) {
         Resources system = Resources.getSystem();
         int dayId = system.getIdentifier("day", "id", "android");
         int monthId = system.getIdentifier("month", "id", "android");
@@ -812,14 +812,14 @@ public class Utils {
         setDividerColor(monthPicker);
         setDividerColor(yearPicker);
     }
-
+*/
     /*******************************************************************************
      Function        : setDividerColor
      Description     : pintador de la función colorizeDatePicker
      Input           : picker = NumberPicker a pintar
      Return          : Nothing
      ******************************************************************************/
-    private static void setDividerColor(NumberPicker picker) {
+   /* private static void setDividerColor(NumberPicker picker) {
         if (picker == null)
             return;
 
@@ -836,7 +836,7 @@ public class Utils {
             }
         }
     }
-
+*/
     /*******************************************************************************
      Function        : format32CharsPerLine
      Description     : Reemplaza por un salto de linea al llegar a 40
@@ -976,7 +976,7 @@ public class Utils {
      Return      : TRUE = Si la impresora esta lista
      FALSE = Si la impresora no esta lista
      *******************************************************************************/
-    public static boolean validate_printer(Context c) {
+  /*  public static boolean validate_printer(Context c) {
 
         if ( !Utils.validate_battery(c) ) {
             System.out.println("ENTRO AL FALSE BATERIA ******************");
@@ -993,7 +993,7 @@ public class Utils {
         }
 
         return true;
-    }
+    }*/
 
     /*******************************************************************************
      Function        : validateErrorsConexion

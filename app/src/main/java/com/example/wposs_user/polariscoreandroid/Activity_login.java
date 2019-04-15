@@ -55,8 +55,8 @@ public class Activity_login extends AppCompatActivity {
 
             Global.correo=correo;
             Global.password=pass;
-Messages.packMsgLogin();
-          //  new TaskLogin().execute();//hacer la peticion
+
+         new TaskLogin().execute();//hacer la peticion
 
         /*    Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
@@ -81,6 +81,8 @@ Messages.packMsgLogin();
          Método       : onPreExecute
          Description  : Se ejecuta antes de realizar el proceso, muestra una ventana con uin msj de espera
          *******************************************************************************/
+
+
 
         @Override
         protected void onPreExecute() {
@@ -118,10 +120,10 @@ Messages.packMsgLogin();
         protected void onPostExecute(Boolean value) {
 
             progressDialog.dismiss();
+           Messages.unPackMsgLogin(Activity_login.this);
+            /*if (value) {
 
-            if (value) {
-
-            /*    if ( Messages.unPackMsgLogin(Activity_login.this) ) {
+              if ( Messages.unPackMsgLogin(Activity_login.this) ) {
                     Global.enSesion = true;
 
                     //validar si la clave es el mismo numero de cedula de
@@ -140,13 +142,13 @@ Messages.packMsgLogin();
 
                 }
 
-                limpiarLogin();*/
+                limpiarLogin();
                 // Si es falso, cierra el socket y vuelve a crearlo, si es verdadero el socket continua abierto
                 TCP.disconnect();
 
             }
             else {
-               /* switch (Utils.validateErrorsConexion(false,trans,MainActivity.this) ){
+               switch (Utils.validateErrorsConexion(false,trans,MainActivity.this) ){
 
                     case 0:                                                                         // En caso de que continue = true y error data
                         break;
@@ -161,8 +163,8 @@ Messages.packMsgLogin();
                         Utils.GoToNextActivity(MainActivity.this, ErrorProgramaActivity.class,false);
                         break;
                 }
-                limpiarLogin();*/
-            }
+                limpiarLogin();
+            }*/
         }
 
 

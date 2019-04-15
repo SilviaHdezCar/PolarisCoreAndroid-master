@@ -21,7 +21,7 @@ public class Messages {
 
     public static void packHttpData(){
         //comienza a armar la trama
-        Global.httpDataBuffer = "{\"user_email\" \"<CORREO>\",\"user_password\": \"<PASSWORD>\",\"gethash\": \"true\"}";//se arma la trama
+        Global.httpDataBuffer = "{\"user_email\": \"<CORREO>\",\"user_password\": \"<PASSWORD>\",\"gethash\": \"true\"}" ;//se arma la trama
 
         Global.httpDataBuffer = Global.httpDataBuffer.replace("<CORREO>", Global.correo);
         Global.httpDataBuffer = Global.httpDataBuffer.replace("<PASSWORD>", Global.password);
@@ -30,6 +30,8 @@ public class Messages {
 
 
     }
+
+
 
     public static void packHttpHeader(){
 //cabecera
@@ -49,11 +51,43 @@ public class Messages {
 
     }
 
-/*
+
     public static boolean unPackMsgLogin(Context c) {
 
+        /*"message": "success", "roles": "1", "login": "1",  "id": "1090123456", "status": "ACTIVO",
+                "position": "administrador", "code": "1093779293"*/
 
-    }*/
+       //Global.TOKEN;
+
+        String tramaCompleta="";
+
+
+        int indice=0;
+
+        Global.inputData=Global.httpDataBuffer.getBytes();
+
+       tramaCompleta=uninterpret_ASCII(Global.inputData, indice,Global.inputData.length);//se convierte arreglo de bytes a string
+
+        int tramaNecesitada=tramaCompleta.indexOf("}");
+
+        String trama=tramaCompleta.substring(0,tramaNecesitada+1);//trama completa recibida
+
+        String [] lineastrama=trama.split(",");
+
+
+//       int posToken= lineastrama[0].indexOf(",");
+       Global.TOKEN=lineastrama[0].substring(10,lineastrama[0].length()-1);
+       Global.MESSAGE=lineastrama[1].substring(11,lineastrama[1].length()-1);
+       Global.ROL = lineastrama[2].substring(9,lineastrama[2].length()-1);
+       Global.LOGIN = lineastrama[3].substring(9,lineastrama[3].length()-1);
+       Global.ID = lineastrama[4].substring(6,lineastrama[4].length()-1);
+       Global.STATUS = lineastrama[5].substring(10,lineastrama[5].length()-1);
+       Global.POSITION = lineastrama[6].substring(12,lineastrama[6].length()-1);
+       Global.CODE = lineastrama[7].substring(8,lineastrama[7].length()-1);
+
+        return true;
+
+    }
 
 
 
@@ -106,6 +140,20 @@ public class Messages {
     }
 
 
+
+    /** Este metodo convierte un array de Bytes a un objeto tipo String
+     * @retorna la cadena tipo String
+     */
+    public static String uninterpret_ASCII(byte[] rawData, int offset, int length){
+        char[] ret = new char[length];
+        for (int i = 0; i < length; i++)
+        {
+            ret[i] = (char)rawData[offset + i];
+        }
+        return new String(ret);
+    }
+
+
     private static void GuardarMensaje(String mensaje) {
 
 
@@ -113,4 +161,7 @@ public class Messages {
 
 
     }
+
+
+
 }
