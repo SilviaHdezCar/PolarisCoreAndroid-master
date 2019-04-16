@@ -28,6 +28,7 @@ public class Global {
     public static String CODE;
 
     //variables donde se guarda lo que recibe de la trama al intentar iniciar sesion
+    public static String DESCRIPCION_ERROR;
 
 
 
@@ -66,4 +67,9 @@ public class Global {
 
 
     public static boolean enSesion=false;
+
+    public static boolean         StatusExit              = false;
+
+    public static String MsgError;
+    public static final String MSG_ERR_CONEXION        = "Error de Conexión: No se estableció comunicación con el servidor, revise la configuración de Datos Móviles o WIFI";
 }

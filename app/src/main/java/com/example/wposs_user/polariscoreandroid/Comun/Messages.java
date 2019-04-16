@@ -3,37 +3,39 @@ package com.example.wposs_user.polariscoreandroid.Comun;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.SQLOutput;
+
 public class Messages {
 
 
-
-    public static void packMsgLogin(){
+    public static void packMsgLogin() {
         packHttpData();
         packHttpHeader();
 
         Global.outputData = (Global.httpHeaderBuffer + "\r\n\r\n" + Global.httpDataBuffer).getBytes();
-        Log.d("Silvia",  "DATA**********"+Global.httpDataBuffer);
-        Log.d("Silvia",  "HEADER**********"+Global.httpHeaderBuffer);
+
         Global.outputLen = Global.outputData.length;
-        Utils.dumpMemory(Global.outputData, Global.outputLen);
+        //Utils.dumpMemory(Global.outputData, Global.outputLen);
 
     }
 
-    public static void packHttpData(){
+    public static void packHttpData() {
         //comienza a armar la trama
-        Global.httpDataBuffer = "{\"user_email\": \"<CORREO>\",\"user_password\": \"<PASSWORD>\",\"gethash\": \"true\"}" ;//se arma la trama
+        Global.httpDataBuffer = "{\"user_email\": \"<CORREO>\",\"user_password\": \"<PASSWORD>\",\"gethash\": \"true\"}";//se arma la trama
 
         Global.httpDataBuffer = Global.httpDataBuffer.replace("<CORREO>", Global.correo);
         Global.httpDataBuffer = Global.httpDataBuffer.replace("<PASSWORD>", Global.password);
         //fn
 
 
-
     }
 
 
-
-    public static void packHttpHeader(){
+    public static void packHttpHeader() {
 //cabecera
         int tam;
         Global.httpHeaderBuffer = "";
@@ -54,56 +56,54 @@ public class Messages {
 
     public static boolean unPackMsgLogin(Context c) {
 
+        String tramaCompleta = "";
 
-        String tramaCompleta="";
 
+        int indice = 0;
 
-        int indice=0;
+        Global.inputData = Global.httpDataBuffer.getBytes();
 
-        Global.inputData=Global.httpDataBuffer.getBytes();
+        tramaCompleta = uninterpret_ASCII(Global.inputData, indice, Global.inputData.length);//se convierte arreglo de bytes a string
 
-       tramaCompleta=uninterpret_ASCII(Global.inputData, indice,Global.inputData.length);//se convierte arreglo de bytes a string
+        int tramaNecesitada = tramaCompleta.indexOf("}");
 
-        int tramaNecesitada=tramaCompleta.indexOf("}");
+        String trama = tramaCompleta.substring(0, tramaNecesitada + 1);//ESTA ES LA TRAMA QUE ENVIA EL SERVIDOR, ES LA QUE SE VA A DESEMPAQUETAR
 
-        String trama=tramaCompleta.substring(0,tramaNecesitada+1);//trama completa recibida
+        String[] lineastrama = trama.split(",");
 
-        String [] lineastrama=trama.split(",");
+        JSONObject jsonObject =null;
+        try {
+            jsonObject = new JSONObject(tramaCompleta);
 
-     //   IF()-MAL
-        if(lineastrama.length<=2){
+            Global.MESSAGE=jsonObject.get("message").toString();
+            Log.i("MESSAGE:    ",""+Global.MESSAGE);
 
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-
-//      int posToken= lineastrama[0].indexOf(",");
-       Global.TOKEN=lineastrama[0].substring(10,lineastrama[0].length()-1);
-       Global.MESSAGE=lineastrama[1].substring(11,lineastrama[1].length()-1);
-       Global.ROL = lineastrama[2].substring(9,lineastrama[2].length()-1);
-       Global.LOGIN = lineastrama[3].substring(9,lineastrama[3].length()-1);
-       Global.ID = lineastrama[4].substring(6,lineastrama[4].length()-1);
-       Global.STATUS = lineastrama[5].substring(10,lineastrama[5].length()-1);
-       Global.POSITION = lineastrama[6].substring(12,lineastrama[6].length()-1);
-       Global.CODE = lineastrama[7].substring(8,lineastrama[7].length()-1);
-
-
-
-        return true;
-
-
-
-        //IF
+        if (!Global.MESSAGE.equalsIgnoreCase("success")) {
+            try {
+                Global.mensaje=jsonObject.get("description").toString();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }else {
+            Global.mensaje="inicio de sesion correcto";
+            Global.TOKEN = lineastrama[0].substring(10, lineastrama[0].length() - 1);
+            Global.MESSAGE = lineastrama[1].substring(11, lineastrama[1].length() - 1);
+            Global.ROL = lineastrama[2].substring(9, lineastrama[2].length() - 1);
+            Global.LOGIN = lineastrama[3].substring(9, lineastrama[3].length() - 1);
+            Global.ID = lineastrama[4].substring(6, lineastrama[4].length() - 1);
+            Global.STATUS = lineastrama[5].substring(10, lineastrama[5].length() - 1);
+            Global.POSITION = lineastrama[6].substring(12, lineastrama[6].length() - 1);
+            Global.CODE = lineastrama[7].substring(8, lineastrama[7].length() - 1);
+            return true;
+        }
 
     }
 
-
-
-
-
-
-
-    public static void messageGuardar(int mensaje, String informacion, int tiempo) {
-
+ /*   public static void messageGuardar(int mensaje, String informacion, int tiempo) {
         Global.mensaje="";
         switch(mensaje) {
 
@@ -120,42 +120,23 @@ public class Messages {
                 GuardarMensaje("<Intente mas tarde>");
                 break;
 
-            case 3:
-                GuardarMensaje("Usuario o clave");
-                GuardarMensaje("invalidos !!!");
-                break;
-
-                /*
-            case 4:
-                GuardarMensaje("Clave invalida !!!");
-                break;
-            case 5:
-                GuardarMensaje("ERROR");
-                GuardarMensaje("Problemas de HTTP");
-                break;
-
-
-            case 112:
-                GuardarMensaje("ERROR");
-                GuardarMensaje("CONEXION HTTP no es OK");
-                break;
-*/
             default: break;
         }
 
+        //if(tiempo!=null)
+        //    Global.TimeMensaje=(tiempo);
 
-    }
+    }*/
 
-
-
-    /** Este metodo convierte un array de Bytes a un objeto tipo String
+    /**
+     * Este metodo convierte un array de Bytes a un objeto tipo String
+     *
      * @retorna la cadena tipo String
      */
-    public static String uninterpret_ASCII(byte[] rawData, int offset, int length){
+    public static String uninterpret_ASCII(byte[] rawData, int offset, int length) {
         char[] ret = new char[length];
-        for (int i = 0; i < length; i++)
-        {
-            ret[i] = (char)rawData[offset + i];
+        for (int i = 0; i < length; i++) {
+            ret[i] = (char) rawData[offset + i];
         }
         return new String(ret);
     }
@@ -164,11 +145,10 @@ public class Messages {
     private static void GuardarMensaje(String mensaje) {
 
 
-        Global.mensaje+=mensaje+"\n";
+        Global.mensaje += mensaje + "\n";
 
 
     }
-
 
 
 }

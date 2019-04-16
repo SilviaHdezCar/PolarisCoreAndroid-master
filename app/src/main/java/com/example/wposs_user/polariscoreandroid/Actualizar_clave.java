@@ -3,10 +3,9 @@ package com.example.wposs_user.polariscoreandroid;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class Actualizar_clave extends AppCompatActivity {
-
-
 
 
     @Override
@@ -17,7 +16,9 @@ public class Actualizar_clave extends AppCompatActivity {
 
     }
 
+    public void cambiar_clave(View v) {
 
+    }
 
 
     public void onBackPressed() {

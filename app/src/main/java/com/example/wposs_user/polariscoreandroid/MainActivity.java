@@ -350,6 +350,9 @@ public class MainActivity extends AppCompatActivity
 
         btn_asociadas.setBackgroundColor(0x45A5F3);
 
+
+        //consumir servicio
+
         Vector<Terminal> terminales_asoc = new Vector<>();
         for (Terminal ter : this.terminales) {
             if (ter.getEstado().equalsIgnoreCase("Asociada")) {

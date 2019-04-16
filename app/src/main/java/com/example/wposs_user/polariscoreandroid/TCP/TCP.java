@@ -65,48 +65,6 @@ public class TCP {
             System.out.println("Error setSoTimeout"+ e.getMessage() );
             return Global.ERR_TIMEOUT_SOCKET;
         }
-
-        /*try {
-            byte[] endTransaction = new byte[] { (byte) 0x0D, (byte) 0x0A };
-            int indice = 0;
-            input = Global.tcpSocket.getInputStream();
-
-            //recibe respuesta
-            while ( (Global.inputLen = input.read(Global.inputDataTemp)) != -1 ) {
-
-                System.arraycopy(Global.inputDataTemp, 0, Global.inputData, indice, Global.inputLen);
-                indice += Global.inputLen;
-
-                int encontrado = Utils.find_bytes_secuence(Global.inputDataTemp, endTransaction, Global.inputLen, endTransaction.length);
-
-                if (encontrado != -1)
-                    break;
-
-            }
-
-            Global.inputLen = indice;
-
-            //Global.inputLen = -1;
-            if (Global.inputLen == -1 || Global.inputLen == 0){
-                return Global.ERR_DATA_RECEIVED;
-            }
-
-
-        } catch (IOException e) {
-            //Log.e("E/TCP Client 2 :", "" + ex.getMessage());
-            // Cierra el socket si hay falla en el recibido
-            disconnect();
-            System.out.println("Error getInputStream"+ e.getMessage() );
-            return Global.ERR_READ_SOCKET;
-        }
-
-        try {
-            Global.tcpSocket.setSoTimeout(Global.SOCKET_TIMEOUT);
-        } catch (SocketException e) {
-            System.out.println("Error setSoTimeout"+ e.getMessage() );
-            return Global.ERR_TIMEOUT_SOCKET;
-        }
-*/
         try {
             input = Global.tcpSocket.getInputStream();
             //recibe respuesta
@@ -170,7 +128,7 @@ public class TCP {
         String []aux = status.split(" ");
 
         if(!aux[1].equals(ok_status)){
-            Messages.messageGuardar(111, "Informacion", 500);                         // Caja cerrada
+            Global.mensaje="ERROR \n Problemas de HTTP";                       // Caja cerrada
             return false;
         }
       return true;

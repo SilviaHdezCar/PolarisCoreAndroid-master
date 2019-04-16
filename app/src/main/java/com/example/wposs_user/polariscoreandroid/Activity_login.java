@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.wposs_user.polariscoreandroid.Actividades.DialogError;
 import com.example.wposs_user.polariscoreandroid.Comun.Global;
 import com.example.wposs_user.polariscoreandroid.Comun.Messages;
 import com.example.wposs_user.polariscoreandroid.Comun.Utils;
@@ -49,25 +50,15 @@ public class Activity_login extends AppCompatActivity {
             Toast.makeText(this, "Ingrese la contraseña", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            Global.WEB_SERVICE="/PolarisCore/Users/login";
+            Global.WEB_SERVICE = "/PolarisCore/Users/login";
             Global.primaryIP = Global.INITIAL_IP;
             Global.primaryPort = Global.INITIAL_PORT;
 
-            Global.correo=correo;
-            Global.password=pass;
+            Global.correo = correo;
+            Global.password = pass;
 
             new TaskLogin().execute();//hacer la peticion
 
-            //VALIDA QUE SEA LA PRIMERA VEZ QUE INGRESE AL SISTEMA
-            if(Global.LOGIN.equals("0")){
-                Intent i = new Intent(this, Actualizar_clave.class);
-                startActivity(i);
-                finish();
-            }else{
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
-                finish();
-            }
 
         }
 
@@ -91,7 +82,6 @@ public class Activity_login extends AppCompatActivity {
          *******************************************************************************/
 
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -103,18 +93,18 @@ public class Activity_login extends AppCompatActivity {
         }
 
 
-   /*******************************************************************************
-     Método       : doInBackground
-     Description  : Se ejecuta para realizar la transacción y verificar coenxión
-     *******************************************************************************/
+        /*******************************************************************************
+         Método       : doInBackground
+         Description  : Se ejecuta para realizar la transacción y verificar coenxión
+         *******************************************************************************/
         @Override
         protected Boolean doInBackground(String... strings) {
             Messages.packMsgLogin();
 
-            trans= TCP.transaction(Global.outputLen);
+            trans = TCP.transaction(Global.outputLen);
 
             // Verifica la transacción
-            if ( trans == Global.TRANSACTION_OK)
+            if (trans == Global.TRANSACTION_OK)
                 return true;
             else
                 return false;
@@ -128,22 +118,25 @@ public class Activity_login extends AppCompatActivity {
         protected void onPostExecute(Boolean value) {
 
             progressDialog.dismiss();
-           Messages.unPackMsgLogin(Activity_login.this);
+
             if (value) {
-
-              if ( Messages.unPackMsgLogin(Activity_login.this) ) {
+                System.out.println("*********************************************************************SI SE PUDO CONECTAR****************************");
+                if (Messages.unPackMsgLogin(Activity_login.this)) {
                     Global.enSesion = true;
+                    Global.StatusExit=true;
 
-                    //validar si la clave es el mismo numero de cedula de
-                   // Utils.GoToNextActivity(Activity_login.this, A.class, Global.StatusExit);
-
+                    if(Integer.parseInt(Global.LOGIN)==0){
+                        Utils.GoToNextActivity(Activity_login.this, Actualizar_clave.class, Global.StatusExit);
+                    }else {
+                        Utils.GoToNextActivity(Activity_login.this, MainActivity.class, Global.StatusExit);
+                    }
 
                 } else {
                     // Si el login no es OK, manda mensaje de error
-                    try{
-                        Utils.GoToNextActivity(Activity_login.this, ErrorProgramaActivity.class, Global.StatusExit);
-
-                    }catch (Exception e){
+                    try {
+                       // Utils.GoToNextActivity(Activity_login.this, DialogError.class, Global.StatusExit);
+                        Toast.makeText(Activity_login.this, Global.mensaje, Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     // Limpia el login
@@ -151,12 +144,12 @@ public class Activity_login extends AppCompatActivity {
                 }
 
                 limpiarLogin();
+                Toast.makeText(Activity_login.this, Global.mensaje, Toast.LENGTH_LONG).show();
                 // Si es falso, cierra el socket y vuelve a crearlo, si es verdadero el socket continua abierto
                 TCP.disconnect();
 
-            }
-            else {
-               switch (Utils.validateErrorsConexion(false,trans,Activity_login.this) ){
+            } else {
+                switch (Utils.validateErrorsConexion(false, trans, Activity_login.this)) {
 
                     case 0:                                                                         // En caso de que continue = true y error data
                         break;
@@ -166,12 +159,16 @@ public class Activity_login extends AppCompatActivity {
 
                     default:                                                                        // Errores de conexion
                         Global.MsgError = Global.MSG_ERR_CONEXION;
+                        Global.mensaje=Global.MsgError;
                         Global.StatusExit = false;
                         // Muestra la ventana de error
-                        Utils.GoToNextActivity(Activity_login, ErrorProgramaActivity.class,false);
+                        Toast.makeText(Activity_login.this, Global.mensaje, Toast.LENGTH_LONG).show();
                         break;
                 }
+
+                Toast.makeText(Activity_login.this, Global.mensaje, Toast.LENGTH_LONG).show();
                 limpiarLogin();
+
             }
         }
 

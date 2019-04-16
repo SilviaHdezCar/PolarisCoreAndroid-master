@@ -1005,11 +1005,12 @@ public class Utils {
      Return          : 0 = Si retorna dialogo de error
      -1 = Si retorna actividad de error
      ******************************************************************************/
-   /* public static int validateErrorsConexion(boolean continua, int errors, Context context){
+   public static int validateErrorsConexion(boolean continua, int errors, Context context){
 
         switch (errors) {
             case Global.ERR_DATA_RECEIVED:
-                Utils.CustomAlertDialogImpresion(context, "Error", "No se ha podido descargar el producto", Global.TIME_ERROR);
+
+                Global.mensaje="Error \n No se ha podido descargar el producto";
                 if (continua)
                     return 0;
                 else
@@ -1020,7 +1021,7 @@ public class Utils {
                 return  -1;
         }
     }
-*/    /*******************************************************************************
+   /*******************************************************************************
      Método       : GoToNextActivity
      Description  : Se dirige a otra actividad
      Input        : activity = Clase donde se encuentra

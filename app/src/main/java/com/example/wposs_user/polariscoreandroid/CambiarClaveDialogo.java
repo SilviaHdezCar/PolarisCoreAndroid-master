@@ -120,7 +120,7 @@ public class CambiarClaveDialogo extends AppCompatDialogFragment {
                 contNumero++;
             }
         }
-        if(contLetraMay>0 && contNumero>0 && contLetraMin>0){
+        if(contLetraMay>0 && contNumero>2 && contLetraMin>0){
             return true;
         }
 
