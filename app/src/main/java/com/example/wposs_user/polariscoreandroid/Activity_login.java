@@ -56,11 +56,19 @@ public class Activity_login extends AppCompatActivity {
             Global.correo=correo;
             Global.password=pass;
 
-         new TaskLogin().execute();//hacer la peticion
+            new TaskLogin().execute();//hacer la peticion
 
-        /*    Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            finish();*/
+            //VALIDA QUE SEA LA PRIMERA VEZ QUE INGRESE AL SISTEMA
+            if(Global.LOGIN.equals("0")){
+                Intent i = new Intent(this, Actualizar_clave.class);
+                startActivity(i);
+                finish();
+            }else{
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+                finish();
+            }
+
         }
 
     }
@@ -95,7 +103,7 @@ public class Activity_login extends AppCompatActivity {
         }
 
 
-    /*******************************************************************************
+   /*******************************************************************************
      Método       : doInBackground
      Description  : Se ejecuta para realizar la transacción y verificar coenxión
      *******************************************************************************/
@@ -121,7 +129,7 @@ public class Activity_login extends AppCompatActivity {
 
             progressDialog.dismiss();
            Messages.unPackMsgLogin(Activity_login.this);
-            /*if (value) {
+            if (value) {
 
               if ( Messages.unPackMsgLogin(Activity_login.this) ) {
                     Global.enSesion = true;
@@ -133,7 +141,7 @@ public class Activity_login extends AppCompatActivity {
                 } else {
                     // Si el login no es OK, manda mensaje de error
                     try{
-                        Utils.GoToNextActivity(MainActivity.this, ErrorProgramaActivity.class, Global.StatusExit);
+                        Utils.GoToNextActivity(Activity_login.this, ErrorProgramaActivity.class, Global.StatusExit);
 
                     }catch (Exception e){
                         e.printStackTrace();
@@ -148,7 +156,7 @@ public class Activity_login extends AppCompatActivity {
 
             }
             else {
-               switch (Utils.validateErrorsConexion(false,trans,MainActivity.this) ){
+               switch (Utils.validateErrorsConexion(false,trans,Activity_login.this) ){
 
                     case 0:                                                                         // En caso de que continue = true y error data
                         break;
@@ -160,14 +168,19 @@ public class Activity_login extends AppCompatActivity {
                         Global.MsgError = Global.MSG_ERR_CONEXION;
                         Global.StatusExit = false;
                         // Muestra la ventana de error
-                        Utils.GoToNextActivity(MainActivity.this, ErrorProgramaActivity.class,false);
+                        Utils.GoToNextActivity(Activity_login, ErrorProgramaActivity.class,false);
                         break;
                 }
                 limpiarLogin();
-            }*/
+            }
         }
 
 
+    }
+
+    private void limpiarLogin() {
+        this.txtCorreo.setText("");
+        this.txtPass.setText("");
     }
 
     public void menu(View v) {

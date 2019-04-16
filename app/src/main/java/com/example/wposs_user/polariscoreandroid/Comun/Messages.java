@@ -54,10 +54,6 @@ public class Messages {
 
     public static boolean unPackMsgLogin(Context c) {
 
-        /*"message": "success", "roles": "1", "login": "1",  "id": "1090123456", "status": "ACTIVO",
-                "position": "administrador", "code": "1093779293"*/
-
-       //Global.TOKEN;
 
         String tramaCompleta="";
 
