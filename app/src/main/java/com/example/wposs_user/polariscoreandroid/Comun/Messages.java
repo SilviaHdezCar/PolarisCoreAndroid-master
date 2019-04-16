@@ -70,8 +70,13 @@ public class Messages {
 
         String [] lineastrama=trama.split(",");
 
+     //   IF()-MAL
+        if(lineastrama.length<=2){
 
-//       int posToken= lineastrama[0].indexOf(",");
+        }
+
+
+//      int posToken= lineastrama[0].indexOf(",");
        Global.TOKEN=lineastrama[0].substring(10,lineastrama[0].length()-1);
        Global.MESSAGE=lineastrama[1].substring(11,lineastrama[1].length()-1);
        Global.ROL = lineastrama[2].substring(9,lineastrama[2].length()-1);
@@ -81,7 +86,13 @@ public class Messages {
        Global.POSITION = lineastrama[6].substring(12,lineastrama[6].length()-1);
        Global.CODE = lineastrama[7].substring(8,lineastrama[7].length()-1);
 
+
+
         return true;
+
+
+
+        //IF
 
     }
 

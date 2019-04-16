@@ -9,6 +9,7 @@ public class Global {
     public static String password;
 
 
+
     public static String primaryIP;
     public static int primaryPort;
 
@@ -16,6 +17,7 @@ public class Global {
 
     public static Socket tcpSocket = null;
 
+    //variables don se guarda lo que recibe de la trama al iniciar sesion correctamente
     public static String TOKEN;
     public static  String MESSAGE;
     public static String ROL;
@@ -24,6 +26,8 @@ public class Global {
     public static String STATUS;
     public static String POSITION;
     public static String CODE;
+
+    //variables donde se guarda lo que recibe de la trama al intentar iniciar sesion
 
 
 
