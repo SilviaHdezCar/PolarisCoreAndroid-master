@@ -7,6 +7,8 @@ public class Global {
 
     public static String correo;
     public static String password;
+    public static String headUpdate;
+    public static String bodyUpdate;
 
 
 
@@ -26,6 +28,7 @@ public class Global {
     public static String STATUS;
     public static String POSITION;
     public static String CODE;
+    public static  String claveNueva;
 
     //variables donde se guarda lo que recibe de la trama al intentar iniciar sesion
     public static String DESCRIPCION_ERROR;
@@ -37,7 +40,7 @@ public class Global {
 
     public static  String    WEB_SERVICE          = "";
 
-    public static final String    INITIAL_IP          = "100.25.214.91";
+    public static final String  INITIAL_IP          = "100.25.214.91";
     public static final int    INITIAL_PORT           = 3000;
 
     public static final String    HTTP_HEADER1       = "Content-Type: application/json";

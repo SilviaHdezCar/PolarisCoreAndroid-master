@@ -22,6 +22,19 @@ public class Messages {
         //Utils.dumpMemory(Global.outputData, Global.outputLen);
 
     }
+    public static void packUpdatePass() {
+       packTramaCambioClave();
+       packHttpDataActPass();
+
+        Global.outputData = (Global.headUpdate + "\r\n\r\n" + Global.bodyUpdate).getBytes();
+        Global.outputLen = Global.outputData.length;
+        //Utils.dumpMemory(Global.outputData, Global.outputLen);
+
+    }
+
+
+
+
 
     public static void packHttpData() {
         //comienza a armar la trama
@@ -102,6 +115,35 @@ public class Messages {
         }
 
     }
+
+
+    public static void packTramaCambioClave( ){
+        String tramaCompleta="";
+
+        //Head
+
+   Global.headUpdate= "PUT " + Global.WEB_SERVICE + " HTTP/1.1" + "\r\n";;
+        Global.headUpdate= "Content-Type: application/json" +"\r\n";;
+        Global.headUpdate= "Authenticator:"+Global.TOKEN + "\r\n";;
+        Global.headUpdate= Global.INITIAL_IP;
+        Global.headUpdate= ":"+Global.INITIAL_PORT+ "\r\n";
+        Global.headUpdate= "Content-Length: "+ Global.headUpdate.length();
+
+
+   }
+
+    public static void packHttpDataActPass(){
+
+        //armo el body
+        Global.bodyUpdate= "{\"user_identification\": \"<CORREO>\",\"user_password\": \"<PASSWORD>\"}";//se arma la trama
+
+        Global.bodyUpdate = Global.httpDataBuffer.replace("<CORREO>", Global.ID);
+        Global.bodyUpdate = Global.httpDataBuffer.replace("<PASSWORD>", Global.claveNueva);
+        //fn
+
+
+    }
+
 
  /*   public static void messageGuardar(int mensaje, String informacion, int tiempo) {
         Global.mensaje="";

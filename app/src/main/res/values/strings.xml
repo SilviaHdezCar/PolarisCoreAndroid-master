@@ -19,6 +19,11 @@
     <string name="resp">VERIFICAR RESPUESTAS</string>
     <string name="texto">Bienvenido, por favor complete el siguiente formulario para Iniciar sesión </string>
     <string name="Titulo_t">VERIFICAR RESPUESTAS</string>
+    <string name="Respuesta1">Respuesta 1</string>
+    <string name="Respuesta2">Respuesta 2</string>
+    <string name="Respuesta3">Respuesta 3</string>
+
+
 
 
     <string-array name="preguntas">
