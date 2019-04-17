@@ -1,15 +1,18 @@
-package com.example.wposs_user.polariscoreandroid.Actividades;
+package com.example.wposs_user.polariscoreandroid;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.wposs_user.polariscoreandroid.Actualizar_clave;
+import com.example.wposs_user.polariscoreandroid.Actividades.DialogError;
 import com.example.wposs_user.polariscoreandroid.Comun.Global;
 import com.example.wposs_user.polariscoreandroid.Comun.Messages;
 import com.example.wposs_user.polariscoreandroid.Comun.Utils;
@@ -120,23 +123,24 @@ public class Activity_login extends AppCompatActivity {
                 System.out.println("*********************************************************************SI SE PUDO CONECTAR****************************");
                 if (Messages.unPackMsgLogin(Activity_login.this)) {
                     Global.enSesion = true;
-                    Global.StatusExit = true;
+                    Global.StatusExit=true;
 
-                    if (Integer.parseInt(Global.LOGIN) == 0) {
+                    if(Integer.parseInt(Global.LOGIN)==0){
                         Utils.GoToNextActivity(Activity_login.this, Actualizar_clave.class, Global.StatusExit);
-                    } else {
+                    }else {
                         Utils.GoToNextActivity(Activity_login.this, MainActivity.class, Global.StatusExit);
                     }
 
                 } else {
                     // Si el login no es OK, manda mensaje de error
                     try {
-                        // Utils.GoToNextActivity(Activity_login.this, DialogError.class, Global.StatusExit);
+                       // Utils.GoToNextActivity(Activity_login.this, DialogError.class, Global.StatusExit);
                         Toast.makeText(Activity_login.this, Global.mensaje, Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     // Limpia el login
+
                 }
 
                 limpiarLogin();
@@ -155,7 +159,7 @@ public class Activity_login extends AppCompatActivity {
 
                     default:                                                                        // Errores de conexion
                         Global.MsgError = Global.MSG_ERR_CONEXION;
-                        Global.mensaje = Global.MsgError;
+                        Global.mensaje=Global.MsgError;
                         Global.StatusExit = false;
                         // Muestra la ventana de error
                         Toast.makeText(Activity_login.this, Global.mensaje, Toast.LENGTH_LONG).show();
