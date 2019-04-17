@@ -76,12 +76,17 @@ public class TCP {
         }
 
         if (Global.inputLen > 0) {
+            Global.inputData=Utils.replaceSpecialChars(Global.inputData, Global.inputData.length);
+
             System.out.println("--------------------------------------------------------------------");
             System.out.println("Recibido: ");
             Utils.dumpMemory(Global.inputData, Global.inputLen);
             System.out.println("--------------------------------------------------------------------");
 
-            Utils.replaceSpecialChars();            // Reemplaza los caracteres especiales
+
+            //System.out.println("*********************************************************************************outpu");
+            // Reemplaza los caracteres especiales
+            //Utils.replaceSpecialChars(Global.inputData, Global.inputData.length);            // Reemplaza los caracteres especiales
 
             if(!valida_http()){
                 return -1;

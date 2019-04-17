@@ -862,7 +862,7 @@ public class Utils {
      Input           :
      Return          :
      ******************************************************************************/
-    public static void replaceSpecialChars (){
+   /* public static void replaceSpecialChars (){
 
         replaceChar(Global.inputData, (byte) 0xF1, (byte) 'n', Global.inputData.length); // Cambio la ñ por n
         replaceChar(Global.inputData, (byte) 0xD1, (byte) 'N', Global.inputData.length); // Cambio la Ñ mayusculas por la N
@@ -878,7 +878,148 @@ public class Utils {
         replaceChar(Global.inputData, (byte) 0xFA, (byte) 'u', Global.inputData.length); // Cambio la u tildada por u
         replaceChar(Global.inputData, (byte) 0xBF, (byte) ' ', Global.inputData.length); // Cambio la ¿ tildada por " "
         replaceChar(Global.inputData, (byte) 0xA1, (byte) ' ', Global.inputData.length); // Cambio la ¡ tildada por " "
+    }*/
+
+    public static byte[] replaceSpecialChars(byte[] data, int cnt) {
+
+        byte[] UTF8_n = new byte[]{ (byte) 0xC3, (byte) 0xB1};
+        byte[] UTF8_N = new byte[]{ (byte) 0xC3, (byte) 0x91};
+        byte[] UTF8_A = new byte[]{ (byte) 0xC3, (byte) 0x81};
+        byte[] UTF8_E = new byte[]{ (byte) 0xC3, (byte) 0x89};
+        byte[] UTF8_I = new byte[]{ (byte) 0xC3, (byte) 0x8D};
+        byte[] UTF8_O = new byte[]{ (byte) 0xC3, (byte) 0x93};
+        byte[] UTF8_U = new byte[]{ (byte) 0xC3, (byte) 0x9A};
+        byte[] UTF8_a = new byte[]{ (byte) 0xC3, (byte) 0xA1};
+        byte[] UTF8_e = new byte[]{ (byte) 0xC3, (byte) 0xA9};
+        byte[] UTF8_i = new byte[]{ (byte) 0xC3, (byte) 0xAD};
+        byte[] UTF8_o = new byte[]{ (byte) 0xC3, (byte) 0xB3};
+        byte[] UTF8_u = new byte[]{ (byte) 0xC3, (byte) 0xBA};
+        byte[] UTF8_int= new byte[]{ (byte) 0xC2, (byte) 0xBF};
+        byte[] UTF8_adm= new byte[]{ (byte) 0xC2, (byte) 0xA1};
+
+        cnt = replace_all_bytes_secuences(data, UTF8_n, "n".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_N, "N".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_A, "A".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_E, "E".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_I, "I".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_O, "O".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_U, "U".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_a, "a".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_e, "e".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_i, "i".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_o, "o".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_u, "u".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_int, " ".getBytes(), cnt, 2, 1);
+        cnt = replace_all_bytes_secuences(data, UTF8_adm, " ".getBytes(), cnt, 2, 1);
+
+        byte[] newData = new byte[cnt];
+        System.arraycopy(data, 0, newData, 0, cnt);
+
+        return newData;
     }
+    /***
+     Function:	  replace_all_bytes_secuences
+     Description: reemplaza todas las ocurrencias de la secuencia de Bytes S2 en S1 por S3
+     Input:		  S1 = array de Bytes base
+     S2 = array de Bytes a buscar
+     S3 = array de Bytes a reemplazar
+     lenS1 = longitud del Array S1
+     lenS2 = longitud del Array S2
+     lenS3 = longitud del Array S3
+     Return:	  longitud del nuevo array de Bytes S1
+     ***/
+    private static int replace_all_bytes_secuences(byte[] S1, byte[] S2, byte[] S3, int lenS1, int lenS2, int lenS3){
+        int i=0, indice= 0;
+
+        Global.lenS1 = lenS1;
+
+        do{
+            indice= replace_bytes_secuence(S1, S2, S3, lenS2, lenS3);
+
+            if(indice != 0)
+                i += indice;
+
+        }while(indice != 0);
+
+        return Global.lenS1;
+
+    }
+
+    /***
+     Function:	  replace_bytes_secuence
+     Description: reemplaza la primera ocurrencia de la secuencia de Bytes S2 en S1 por S3
+     Input:		  S1 = array de Bytes base
+     S2 = array de Bytes a buscar
+     S3 = array de Bytes a reemplazar
+     lenS1 = longitud del Array S1
+     lenS2 = longitud del Array S2
+     lenS3 = longitud del Array S3
+     Return:	  retorna el indice de la posicion siguiente al campo reemplazado
+     retorna 0 sino encontró la cadena
+     ***/
+
+    private static int replace_bytes_secuence(byte[] S1, byte[] S2, byte[] S3, int lenS2, int lenS3){
+        byte[] buffer = new byte[Global.MAX_LEN_INPUTDATA];
+        int i, lenBuffer;
+
+        i = find_bytes_secuence(S1, S2, Global.lenS1, lenS2);
+
+        if( i == -1 )
+            return 0;
+
+        lenBuffer =  (Global.lenS1) - (i + lenS2);
+
+        System.arraycopy(S1, i + lenS2, buffer, 0, lenBuffer);
+
+        System.arraycopy(S3, 0, S1, i, lenS3);
+
+        System.arraycopy(buffer, 0, S1, i + lenS3, lenBuffer);
+
+        Global.lenS1 = i + lenS3 + lenBuffer;
+
+        return i + lenS3;
+    }
+
+    /***
+     Function:	  find_bytes_secuence
+     Description: encuentra la primera ocurrencia de la secuencia de Bytes S2 en S1
+     Input:		  S1 = array de Bytes base
+     S2 = array de Bytes a buscar
+     lenS1 = longitud del Array S1
+     lenS2 = longitud del Array S2
+     Return:	  retorna el indice de la secuencia encontrada
+     retorna -1 sino encontró la secuencia
+     ***/
+    public static int find_bytes_secuence(byte[] S1, byte[] S2, int lenS1, int lenS2){
+        int i, j, len = 0;
+        boolean primeraCoincidencia = false;
+
+        for(i=0; i<lenS1; i++){
+
+            len=0;
+            for(j=0; j<lenS2; j++){
+                if(S1[i + j] == S2[j]){
+                    len++;
+                    primeraCoincidencia = true;
+                    if(len == lenS2)
+                        return(i);
+                }
+                else{
+                    if (primeraCoincidencia)
+                        len = 0;
+
+                    i+=len;
+                    break;
+                }
+            }
+
+        }
+
+        return -1;
+
+    }
+
+
 
     /*********
      Function:	  find_bytes_secuence
@@ -890,7 +1031,7 @@ public class Utils {
      Return:	  retorna el indice de la secuencia encontrada
      retorna -1 sino encontró la secuencia
      *********/
-    public static int find_bytes_secuence(byte[] S1, byte[] S2, int lenS1, int lenS2){
+  /*  public static int find_bytes_secuence(byte[] S1, byte[] S2, int lenS1, int lenS2){
         int i, j, len = 0;
         boolean primeraCoincidencia = false;
 
@@ -916,7 +1057,7 @@ public class Utils {
 
         return -1;
 
-    }
+    }*/
 
     /***********************************************************************************************
      Function        : validate_battery

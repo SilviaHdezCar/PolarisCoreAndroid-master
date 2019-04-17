@@ -1,26 +1,24 @@
-package com.example.wposs_user.polariscoreandroid;
+package com.example.wposs_user.polariscoreandroid.Fragmentos;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import com.example.wposs_user.polariscoreandroid.Actividades.MainActivity;
+import com.example.wposs_user.polariscoreandroid.Tools;
 
 import java.util.Date;
 import java.util.Locale;
-import java.util.Vector;
 
 
 public class ConsultaTerminalesReparadasFragm extends Fragment {

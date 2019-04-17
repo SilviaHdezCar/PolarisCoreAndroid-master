@@ -1,24 +1,15 @@
-package com.example.wposs_user.polariscoreandroid;
+package com.example.wposs_user.polariscoreandroid.Fragmentos;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Vector;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
+import com.example.wposs_user.polariscoreandroid.Actividades.MainActivity;
 
 
 public class ConsultaTerminalesSerial extends Fragment {

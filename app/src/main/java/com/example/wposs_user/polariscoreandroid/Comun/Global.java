@@ -1,12 +1,21 @@
 package com.example.wposs_user.polariscoreandroid.Comun;
 
+import com.example.wposs_user.polariscoreandroid.java.Terminal;
+import com.example.wposs_user.polariscoreandroid.java.Observacion;
+import com.example.wposs_user.polariscoreandroid.java.Tipificacion;
+import com.example.wposs_user.polariscoreandroid.java.Validacion;
+
 import java.net.Socket;
+import java.util.List;
 
 public class Global {
 
 
     public static String correo;
     public static String password;
+
+    //dato que obtiene para listar las observaciones de la terminal
+    public static String serial;
 
 
 
@@ -26,6 +35,7 @@ public class Global {
     public static String STATUS;
     public static String POSITION;
     public static String CODE;
+    public static String NOMBRE;
 
     //variables donde se guarda lo que recibe de la trama al intentar iniciar sesion
     public static String DESCRIPCION_ERROR;
@@ -72,4 +82,17 @@ public class Global {
 
     public static String MsgError;
     public static final String MSG_ERR_CONEXION        = "Error de Conexión: No se estableció comunicación con el servidor, revise la configuración de Datos Móviles o WIFI";
+
+
+    public static int lenS1;
+
+
+    //Listar teminales
+    public static List<Terminal> TERMINALES_ASOCIADAS;
+    public static List<Observacion> OBSERVACIONES;
+    public static List<Validacion> VALIDACIONES;
+    public static List<Tipificacion> TIPIFICACIONES;
+
+
+
 }

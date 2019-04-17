@@ -62,5 +62,6 @@
         <item>Diagnostico</item>
         <item>Reparadas</item>
     </string-array>
+    <string name="title_activity_tipificaciones_diagnostico">TipificacionesDiagnostico</string>
 
 </resources>

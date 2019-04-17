@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wposs_user.polariscoreandroid.R;
-import com.example.wposs_user.polariscoreandroid.Repuesto;
+import com.example.wposs_user.polariscoreandroid.java.Repuesto;
 
 import java.util.Vector;
 

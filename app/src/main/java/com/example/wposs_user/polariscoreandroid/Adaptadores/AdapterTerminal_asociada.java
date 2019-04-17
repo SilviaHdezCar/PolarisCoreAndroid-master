@@ -8,20 +8,28 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wposs_user.polariscoreandroid.R;
-import com.example.wposs_user.polariscoreandroid.Terminal;
+import com.example.wposs_user.polariscoreandroid.java.Terminal;
 
-import java.util.Vector;
+import java.util.List;
 
 public class AdapterTerminal_asociada extends RecyclerView.Adapter<AdapterTerminal_asociada.ViewHolderTerminal> {
 
-    private Vector<Terminal> listTerminal;
+    private List<Terminal> listTerminal;
     private LayoutInflater inflador;
 
-    public AdapterTerminal_asociada(Context c, Vector<Terminal> list) {
+    interfaceClick ic;
+    private int layoutButton;
+
+    public AdapterTerminal_asociada(Context c, List<Terminal> list) {
         this.listTerminal = list;
         this.inflador = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    public AdapterTerminal_asociada(List<Terminal> terminales, interfaceClick ic,int layoutButton) {
+        this.listTerminal = terminales;
+        this.ic = ic;
+        this.layoutButton = layoutButton;
+    }
 
 
     @Override
@@ -32,21 +40,32 @@ public class AdapterTerminal_asociada extends RecyclerView.Adapter<AdapterTermin
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderTerminal holder, int i) {
-        Terminal ter = this.listTerminal.elementAt(i);
-        holder.serial.setText( ter.getSerial());
-        holder.marca.setText( ter.getMarca());
-        holder.modelo.setText( ter.getModelo());
-        holder.tecnologia.setText( ter.getTecnologia());
-        holder.estado.setText(ter.getEstado());
-        holder.fechaANS.setText(ter.getFechaLimite()+"");
+    public void onBindViewHolder(final ViewHolderTerminal holder, final int i) {
+
+        holder.serial.setText(this.listTerminal.get(i).getSerial());
+        holder.marca.setText(this.listTerminal.get(i).getMarca());
+        holder.modelo.setText(this.listTerminal.get(i).getModelo());
+        holder.tecnologia.setText(this.listTerminal.get(i).getTecnologia());
+        holder.estado.setText(this.listTerminal.get(i).getEstado());
+        holder.fechaANS.setText(this.listTerminal.get(i).getFechaLimite() + "");
+
 
     }
+
 
     @Override
     public int getItemCount() {
         return listTerminal.size();
 
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    public interface interfaceClick {
+        void onClick(List<Terminal> button, int position);
     }
 
     public class ViewHolderTerminal extends RecyclerView.ViewHolder {
@@ -73,7 +92,6 @@ public class AdapterTerminal_asociada extends RecyclerView.Adapter<AdapterTermin
 
 
     }
-
 
 
 }
